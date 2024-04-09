@@ -13,7 +13,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/api', router)
 
-//Обработка ошибок всегда в конце
+//Обработка ошибок всегда в конце, последний Middleware
 app.use(errorHandler)
 
 app.get('/',(req, res)=>{
