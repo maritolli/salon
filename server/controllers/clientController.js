@@ -3,6 +3,9 @@ const ApiError = require('../error/ApiError');
 
 class ClientController{
     async registration(req, res){
+        const {Fname, Login, Password} = req.body;
+        const Client = await clients.create({Fname, Login, Password});
+        return res.json(Client);
 
     }
     async login(req, res){
