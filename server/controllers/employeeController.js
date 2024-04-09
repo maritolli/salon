@@ -6,7 +6,7 @@ class EmployeeController{
 
     }
     async check(req, res){
-
+        res.json('dddd')
     }
 }
 

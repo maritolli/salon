@@ -7,8 +7,8 @@ class ClientController{
     async login(req, res){
 
     }
-    async check(req, res, next){
-        const {id} = req.query
+    async check(req, res, next){ //проверка на авторизацию
+        const {id} = req.query //простая проверка на ошибки
         if (!id){
             return next(ApiError.badRequest('Не задан ID'))
         }

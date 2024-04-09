@@ -1,3 +1,4 @@
+//универсальный обработчик ошибок
 class ApiError extends Error {
     constructor(status, message) {
         super();
@@ -11,7 +12,7 @@ class ApiError extends Error {
     static internal(message) {
         return new ApiError(500, message)
     }
-    static forbidden(message) {
+    static forbidden(message) { //доступа нет к сайту
         return new ApiError(403, message)
     }
 }
