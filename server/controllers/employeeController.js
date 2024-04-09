@@ -1,3 +1,6 @@
+const {employees} = require('../models/models')
+const ApiError = require('../error/ApiError');
+
 class EmployeeController{
     async registration(req, res){
 
