@@ -23,6 +23,7 @@ class OrderController{
                 }
             })
             //Вот эта божественная переменная спасёт мир
+            //пасим массив и берем 1 переменную, в которой как раз лежит заветное число
             const total_in_json = JSON.parse(JSON.stringify(total[0].dataValues))
 
             const Orders = await orders.create({order_date: Order_date, total_sum: total_in_json.cost})

@@ -6,26 +6,36 @@ const clients = sequelize.define("Clients", {
     Fname: {type: DataTypes.STRING, allowNull: false},
     Login: {type: DataTypes.STRING, allowNull: false, unique: true},
     Password: {type: DataTypes.STRING, allowNull: false, unique: true},
+},{
+    timestamps: false
 })
 
 const orders = sequelize.define("Orders", {
     id_order: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    order_date: {type: DataTypes.DATE},
+    order_date: {type: DataTypes.DATEONLY},
     total_sum: {type: DataTypes.INTEGER, defaultValue: 0},
+},{
+    timestamps: false
 })
 
 const position = sequelize.define("Position", {
     id_position: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+},{
+    timestamps: false
 })
 
 const services = sequelize.define("Services", {
     id_service: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     service_name: {type: DataTypes.STRING, allowNull: false},
     cost: {type: DataTypes.INTEGER, allowNull: false},
+},{
+    timestamps: false
 })
 
 const employees_services = sequelize.define("Employees_services", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+},{
+    timestamps: false
 })
 
 const employees = sequelize.define("Employees", {
@@ -37,7 +47,9 @@ const employees = sequelize.define("Employees", {
     salary: {type: DataTypes.INTEGER, defaultValue: 0},
     bonus: {type: DataTypes.INTEGER, defaultValue: 0},
     role: {type: DataTypes.BOOLEAN},
-})
+}, {
+        timestamps: false
+    })
 
 clients.hasMany(orders)
 orders.belongsTo(clients)
