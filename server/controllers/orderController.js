@@ -9,7 +9,7 @@ class OrderController{
     //добавляя услугу мы будет конкатенировать к id_service услугу и знак and
     // Пример: человек выбрал стрижку мужскую и бороды id_service="1and2"
     async create(req, res){
-        const {id_client, Id_service, id_employee } = req.body;
+        const {Id_client, Id_service, Id_employee } = req.body;
         const Order_date = new Date();
         const help_str = Id_service.toString();
         if(help_str.includes("and")){
@@ -25,9 +25,9 @@ class OrderController{
             //Вот эта божественная переменная спасёт мир
             //пасим массив и берем 1 переменную, в которой как раз лежит заветное число
             const total_in_json = JSON.parse(JSON.stringify(total[0].dataValues))
-
-            const Orders = await orders.create({order_date: Order_date, total_sum: total_in_json.cost})
-
+            const Orders = await orders.create({order_date: Order_date, total_sum: total_in_json.cost, ClientIdClient:Id_client})
+            const Position = await position.create({OrderIdOrder: Orders.id_order, ServiceIdService: Id_service, EmployeeIdEmployee:Id_employee})
+            console.log(JSON.stringify(Position))
             return res.json(Orders);
         }
 
@@ -35,28 +35,14 @@ class OrderController{
     }
     //вывод всех заказов
     async get(req, res){
-        //const Order = await orders.findAll()
-        //return res.json(Order)
-
-        const Total = await services.findAll({
-            attributes:['cost'],
-            where:{
-                id_service: 1
-            }
-        })
-        const total_kkk= await services.findAll();
-        total_kkk.forEach((item)=>{
-            //console.log(item.dataValues);
-        })
-        const a = JSON.parse(JSON.stringify(Total[0].dataValues))
-        console.log(a.cost);
-
-        return res.json(Total)
+        const Order = await orders.findAll()
+        return res.json(Order)
     }
-    async delete(req, res){
-        const Orders = await orders.destroy( {where:{id_order: 1}})
 
-        return res.json(Orders)
+    async delete(req, res){
+        const Orders = await orders.destroy( {where:{id_order: req.query.id_order}});
+        const Position = await position.destroy({where:{id_order: req.query.id_order}})
+        return res.json("Deleted")
     }
 }
 

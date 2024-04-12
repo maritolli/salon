@@ -18,6 +18,9 @@ class ClientController{
         }
         res.json(id)
     }
+    async show_orders(req, res){
+
+    }
 }
 
 module.exports = new ClientController()
