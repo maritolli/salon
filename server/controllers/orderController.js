@@ -1,4 +1,4 @@
-const {orders, position, services} = require('../models/models')
+const {orders, position, services, employees_services} = require('../models/models')
 const ApiError = require('../error/ApiError');
 const {Op} = require("sequelize");
 
@@ -9,11 +9,48 @@ class OrderController{
     //добавляя услугу мы будет конкатенировать к id_service услугу и знак and
     // Пример: человек выбрал стрижку мужскую и бороды id_service="1and2"
     async create(req, res){
-        const {Id_client, Id_service, Id_employee } = req.body;
-        const Order_date = new Date();
-        const help_str = Id_service.toString();
-        if(help_str.includes("and")){
+        const {Id_client, Id_service, Id_employee, Order_date } = req.body;
+        //jjgjgjg
+        if(Id_service.length > 1){
+            //Найдём сначала общую стоимость
+            let Total = 0
+            const all_cost = await services.findAll({
+                where:{
+                    id_service: Id_service
+                }
+            })
+            for(let i = 0; i < Id_service.length; ++i){
+                Total = Total + all_cost[i].cost
+            }
 
+            //Затем добавим запись в таблицу заказов
+            const Orders = await orders.create({
+                order_date: Order_date, total_sum: Total, ClientIdClient:Id_client
+            })
+            console.log(JSON.stringify(Orders))
+
+
+            //Далле добавим строки в таблицу position
+            for(let i = 0; i < Id_employee.length; ++i){
+                for(let j = 0; j < Id_service.length; j++){
+                    const check_employee_service = await employees_services.findOne({
+                        where:{
+                            ServiceIdService: Id_service[j],
+                            EmployeeIdEmployee: Id_employee[i]
+                        }
+                    })
+                    //Если существует соотношения услуга-работник, то добавляем
+                    if(check_employee_service){
+                        const New_position = await position.create({
+                            OrderIdOrder: Orders.id_order,
+                            ServiceIdService: Id_service[j],
+                            EmployeeIdEmployee: Id_employee[i]
+                        })
+                        console.log(JSON.stringify(`Created position with id service: ${Id_service[j]} ,id_employee: ${Id_employee[i]}`))
+                    }
+                }
+            }
+            return res.json(Orders);
         }
         else{
             const total = await services.findAll({
@@ -23,7 +60,7 @@ class OrderController{
                 }
             })
             //Вот эта божественная переменная спасёт мир
-            //пасим массив и берем 1 переменную, в которой как раз лежит заветное число
+            //парсим массив и берем 1 переменную, в которой как раз лежит заветное число
             const total_in_json = JSON.parse(JSON.stringify(total[0].dataValues))
             const Orders = await orders.create({order_date: Order_date, total_sum: total_in_json.cost, ClientIdClient:Id_client})
             const Position = await position.create({OrderIdOrder: Orders.id_order, ServiceIdService: Id_service, EmployeeIdEmployee:Id_employee})

@@ -1,4 +1,4 @@
-const {employees, orders, position, services, employees_services} = require('../models/models')
+const {employees, orders, position, services, employees_services, clients} = require('../models/models')
 const ApiError = require('../error/ApiError');
 const Employee = require("../models/models");
 const { Op, QueryTypes, fn, col} = require("sequelize");
@@ -104,12 +104,27 @@ class EmployeeController{
         //Но с человеческой точки зрения если он две услуги делает, то это двойная работа
         //Следовательно это будет учитываться
         const results = await orders.findAll({
-            include: {
-                model: position,
-                attributes: ['EmployeeIdEmployee'],
-                required: true
-            },
-        }, {where: {id_employee: req.query.id}});
+            attributes:['id_order', 'order_date'],
+            include: [
+                {
+                    model: position,
+                    attributes: ['EmployeeIdEmployee'],
+                    where: {EmployeeIdEmployee: req.query.id},
+                    required: true,
+                    include:{
+                        model: services,
+                        attributes: ['service_name'],
+                        required: true
+                    }
+                },
+                {
+                    model:clients,
+                    attributes: ['Fname'],
+                    required: true
+                }
+            ]
+
+        });
 
         if(!results){return res.json("THIS EMPLOYEE HAS NO ORDERS")}//
         return res.json(results)
@@ -118,8 +133,13 @@ class EmployeeController{
     //Эта функция выводит сотрудников и количество заказов у них
     async show_best_employees(req, res){
         const Best_employees = await position.findAll({
+            include:{
+                model: employees,
+                attributes:['fname'],
+                required: true
+            },
             attributes: ['EmployeeIdEmployee', [fn('count', col('OrderIdOrder')), 'orders_count']],
-            group: ['Position.EmployeeIdEmployee'],
+            group: ['Position.EmployeeIdEmployee','id_employee'],
             order: [['EmployeeIdEmployee','ASC']]
         })
         return res.json(Best_employees)

@@ -1,4 +1,4 @@
-const {services} = require('../models/models')
+const {services, employees_services} = require('../models/models')
 const ApiError = require('../error/ApiError');
 
 //////////////////////////////////////////////////////////
@@ -16,6 +16,7 @@ class ServiceController{
     async get(req, res){
         const Service = await services.findAll()
         return res.json(Service)
+        //Обновление услуги на всякий пусть будет
         // const Service_upd = await services.findOne({where: { id_service: 1 }})
         // if(Service_upd){
         //     Service_upd.service_name="Стрижка женская (средняя длина)"
