@@ -1,4 +1,4 @@
-const {clients} = require('../models/models')
+const {clients, orders} = require('../models/models')
 const ApiError = require('../error/ApiError');
 
 class ClientController{
@@ -19,7 +19,9 @@ class ClientController{
         res.json(id)
     }
     async show_orders(req, res){
-
+        const All_orders = await orders.findAll({where:{ClientIdClient: req.query.id}})
+        console.log("COOL")
+        return res.json(All_orders)
     }
 }
 

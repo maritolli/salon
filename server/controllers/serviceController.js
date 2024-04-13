@@ -19,7 +19,7 @@ class ServiceController{
         // const Service_upd = await services.findOne({where: { id_service: 1 }})
         // if(Service_upd){
         //     Service_upd.service_name="Стрижка женская (средняя длина)"
-        //     Service_upd.save()
+        //     await Service_upd.save()
         // }
         // return res.json(Service_upd)
     }
