@@ -10,7 +10,6 @@ class OrderController{
     // Пример: человек выбрал стрижку мужскую и бороды id_service="1and2"
     async create(req, res){
         const {Id_client, Id_service, Id_employee, Order_date } = req.body;
-        //jjgjgjg
         if(Id_service.length > 1){
             //Найдём сначала общую стоимость
             let Total = 0
@@ -22,17 +21,16 @@ class OrderController{
             for(let i = 0; i < Id_service.length; ++i){
                 Total = Total + all_cost[i].cost
             }
-
             //Затем добавим запись в таблицу заказов
             const Orders = await orders.create({
                 order_date: Order_date, total_sum: Total, ClientIdClient:Id_client
             })
             console.log(JSON.stringify(Orders))
 
-
-            //Далле добавим строки в таблицу position
+            //Далее добавим строки в таблицу position
             for(let i = 0; i < Id_employee.length; ++i){
                 for(let j = 0; j < Id_service.length; j++){
+                    //выполняет ли сотрудник данную услугу
                     const check_employee_service = await employees_services.findOne({
                         where:{
                             ServiceIdService: Id_service[j],
@@ -77,8 +75,8 @@ class OrderController{
     }
 
     async delete(req, res){
+        const Position = await position.destroy({where:{OrderIdOrder: req.query.id_order}})
         const Orders = await orders.destroy( {where:{id_order: req.query.id_order}});
-        const Position = await position.destroy({where:{id_order: req.query.id_order}})
         return res.json("Deleted")
     }
 }

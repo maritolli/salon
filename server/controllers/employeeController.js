@@ -22,10 +22,10 @@ class EmployeeController{
         }
 
 
-        ////////////////////////////////////////////////
-        //Следующий кусок кода добавляет информацию о сотруднике
-        // в таблицу employees_services в зависимости от специализации конечно
-        ///////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////
+        //Следующий кусок кода добавляет информацию о сотруднике                //
+        // в таблицу employees_services в зависимости от специализации конечно  //
+        //////////////////////////////////////////////////////////////////////////
         const local_specialization = Employee.specialization
         const local_id = Employee.id_employee
 
@@ -86,8 +86,6 @@ class EmployeeController{
         // return res.json("ALL HAVE WORKED CORRECTLY AND DATABASE CHANGED")
 
         //Select... where service_name like any [...]
-
-
     }
     async delete(req, res){
         const Employee = await employees.destroy({where: {id_employee: req.query.id}});
@@ -110,7 +108,7 @@ class EmployeeController{
                     model: position,
                     attributes: ['EmployeeIdEmployee'],
                     where: {EmployeeIdEmployee: req.query.id},
-                    required: true,
+                    required: true, //inner join
                     include:{
                         model: services,
                         attributes: ['service_name'],
@@ -123,9 +121,7 @@ class EmployeeController{
                     required: true
                 }
             ]
-
         });
-
         if(!results){return res.json("THIS EMPLOYEE HAS NO ORDERS")}//
         return res.json(results)
     }
@@ -138,9 +134,14 @@ class EmployeeController{
                 attributes:['fname'],
                 required: true
             },
+            //интересная функция fn, которая агр. функцию делает по столбцу
             attributes: ['EmployeeIdEmployee', [fn('count', col('OrderIdOrder')), 'orders_count']],
             group: ['Position.EmployeeIdEmployee','id_employee'],
-            order: [['EmployeeIdEmployee','ASC']]
+            //order: [['EmployeeIdEmployee','ASC']]
+
+            ///////////////////////////////////////
+            order: [['orders_count','DESC']]
+            ////////////////////////////////////
         })
         return res.json(Best_employees)
     }
@@ -149,7 +150,7 @@ class EmployeeController{
     async give_bonus(req, res){
         const {Id_employee, bonus} = req.body
         const Chosen_employee = await employees.findOne({where:{id_employee: Id_employee}})
-        if(!Chosen_employee){return res.json("NO EMPLOYEE")}
+        if(!Chosen_employee) {return res.json("NO EMPLOYEE")}
         Chosen_employee.bonus = bonus
         await Chosen_employee.save()
         return res.json(Chosen_employee)

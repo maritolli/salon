@@ -11,6 +11,7 @@ class ClientController{
     async login(req, res){
 
     }
+
     async check(req, res, next){ //проверка на авторизацию
         const {id} = req.query //простая проверка на ошибки
         if (!id){
@@ -18,6 +19,7 @@ class ClientController{
         }
         res.json(id)
     }
+
     async show_orders(req, res){
         const All_orders = await orders.findAll({where:{ClientIdClient: req.query.id}})
         console.log("COOL")
