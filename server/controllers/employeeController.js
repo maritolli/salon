@@ -138,7 +138,6 @@ class EmployeeController{
             attributes: ['EmployeeIdEmployee', [fn('count', col('OrderIdOrder')), 'orders_count']],
             group: ['Position.EmployeeIdEmployee','id_employee'],
             //order: [['EmployeeIdEmployee','ASC']]
-
             ///////////////////////////////////////
             order: [['orders_count','DESC']]
             ////////////////////////////////////

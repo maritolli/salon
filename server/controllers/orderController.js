@@ -54,14 +54,14 @@ class OrderController{
             const total = await services.findAll({
                 attributes:['cost'],
                 where:{
-                    id_service:{[Op.eq]:Id_service}
+                    id_service:{[Op.eq]:Id_service[0]}
                 }
             })
             //Вот эта божественная переменная спасёт мир
             //парсим массив и берем 1 переменную, в которой как раз лежит заветное число
             const total_in_json = JSON.parse(JSON.stringify(total[0].dataValues))
             const Orders = await orders.create({order_date: Order_date, total_sum: total_in_json.cost, ClientIdClient:Id_client})
-            const Position = await position.create({OrderIdOrder: Orders.id_order, ServiceIdService: Id_service, EmployeeIdEmployee:Id_employee})
+            const Position = await position.create({OrderIdOrder: Orders.id_order, ServiceIdService: Id_service[0], EmployeeIdEmployee:Id_employee[0]})
             console.log(JSON.stringify(Position))
             return res.json(Orders);
         }
