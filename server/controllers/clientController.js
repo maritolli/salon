@@ -2,6 +2,7 @@ const {clients, orders} = require('../models/models')
 const ApiError = require('../error/ApiError');
 
 const bcrypt = require ('bcrypt')
+const jwt = require ('jsonwebtoken')
 
 class ClientController{
     async registration(req, res, next){
@@ -13,11 +14,14 @@ class ClientController{
         if (candidate){ //если вернулся и непустой
             return next(ApiError.badRequest('Пользователь с таким логином уже существует'))
         }
-        const hashPassword = await bcrypt.hash(password, 5) //хэшируем пароль
+        const hashPassword = await bcrypt.hash(Password, 5) //хэшируем пароль
         const Client = await clients.create({Fname, Login, Password: hashPassword});
-        const orders
-        return res.json(Client);
-
+        const token = jwt.sign(
+            {id: Client.ClientIdClient, Login},
+            process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
+            {expiresIn: '24h'} //сколько живет токен
+        )
+        return res.json({token});
     }
 
     async login(req, res){
