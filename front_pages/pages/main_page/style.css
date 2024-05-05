@@ -1,0 +1,83 @@
+.main-container{
+    /*Это изменение цвета фона*/
+    background-color:  rgb(4, 61, 93);
+}
+.main-logo{
+    /*Задание размеров*/
+    width: 468px;
+    height: 104px;
+    /*Внешние отсутпы от родительского блока(в котором находится)*/
+    margin:2% auto 0 auto;
+
+}
+
+.man-logo-pricheson{
+    width: 466px;
+    height: 90px;
+
+    margin: 0 auto;
+
+    /*Задание цвета текста, шрифта(чаще всего пишем sans-serif) рамзер, толщина, и высота*/
+    color: rgb(255, 255, 255);
+    font-family: Luckiest Guy, sans-serif;
+    font-size: 90px;
+    font-weight: 400;
+    line-height: 90px;
+    /*Ориентация текста*/
+    text-align: center;
+}
+
+.main-logo-add-words{
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 100%;
+    text-align: center;
+    color: white;
+}
+
+.main-question{
+    margin: 5% auto 0.5% auto;
+}
+
+.main-question-text{
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 54px;
+    font-weight: 400;
+    line-height: 67px;
+
+    text-align: center;
+    color: white;
+}
+
+
+.main-pictures{
+    margin: 0 auto;
+
+    /*Лучше самой прочитать про display: flex, но в кратце: просто позволяет нам вертеть объекты внутри данного, как мы хотим*/
+    display: flex;
+    /*Тут я задаю расстояние между объектами(наши три картинки)*/
+    gap: 150px;
+    /*Этот параметр отвечает за то, где они будут находиться по горизонтали*/
+    justify-content: center;
+}
+
+.main-image{
+    width: 360px;
+    height: 360px;
+}
+/*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
+.main-image:hover{
+    /*Это тень(как именно влияют параметры - я хз)*/
+    box-shadow:0 0 15px #00aaff;
+    /*делаем границу толщиной 1 пиксель жирной и цветом(типо голубенький)*/
+    border:1px solid #00aaff;
+}
+
+.main-enter-logo{
+    /*Если position: absolute, то блоку вс равно внутри чего он находится, он будет позиционировать себя от краёв страницы.
+    То есть он не привязан ни к какому другому блоку, а как бы сам по себе.*/
+    position: absolute;
+    right: 2%;
+    top: 3%;
+}
