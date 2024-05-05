@@ -74,10 +74,17 @@
     border:1px solid #00aaff;
 }
 
-.main-enter-logo{
+.main-enter-logo-link{
     /*Если position: absolute, то блоку вс равно внутри чего он находится, он будет позиционировать себя от краёв страницы.
     То есть он не привязан ни к какому другому блоку, а как бы сам по себе.*/
     position: absolute;
     right: 2%;
     top: 3%;
+}
+.main-enter-logo-rectangle{
+    color: white;
+}
+.main-enter-logo-rectangle:hover{
+    box-shadow: 0 0 10px #00aaff;
+    border:1px solid #00aaff;
 }
