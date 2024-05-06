@@ -2,16 +2,16 @@
     /*Это изменение цвета фона*/
     background-color:  rgb(4, 61, 93);
 }
+
 .main-logo{
     /*Задание размеров*/
     width: 468px;
     height: 104px;
     /*Внешние отсутпы от родительского блока(в котором находится)*/
     margin:2% auto 0 auto;
-
 }
 
-.man-logo-pricheson{
+.main-logo-pricheson{
     width: 466px;
     height: 90px;
 
@@ -50,13 +50,12 @@
     color: white;
 }
 
-
 .main-pictures{
     margin: 0 auto;
 
-    /*Лучше самой прочитать про display: flex, но в кратце: просто позволяет нам вертеть объекты внутри данного, как мы хотим*/
+    /*просто позволяет нам вертеть объекты внутри данного, как мы хотим*/
     display: flex;
-    /*Тут я задаю расстояние между объектами(наши три картинки)*/
+    /*задаем расстояние между объектами (наши три картинки)*/
     gap: 150px;
     /*Этот параметр отвечает за то, где они будут находиться по горизонтали*/
     justify-content: center;
@@ -65,13 +64,13 @@
 .main-image{
     width: 360px;
     height: 360px;
+
+    border: 1px solid #032E46;
 }
 /*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
 .main-image:hover{
     /*Это тень(как именно влияют параметры - я хз)*/
-    box-shadow:0 0 15px #00aaff;
-    /*делаем границу толщиной 1 пиксель жирной и цветом(типо голубенький)*/
-    border:1px solid #00aaff;
+    box-shadow:0 0 15px #000000;
 }
 
 .main-enter-logo-link{
@@ -87,4 +86,23 @@
 .main-enter-logo-rectangle:hover{
     box-shadow: 0 0 10px #00aaff;
     border:1px solid #00aaff;
+}
+
+/*надписи внизу. ОНИ СТОЯТ КРИВО*/
+.main-little-words{
+    width: 1276px;
+    height: 32px;
+
+    margin: 0 auto 0 auto;
+    display: flex;
+    /*justify-content: space-between;*/
+    /* не особо решает проблему, но мб*/
+    gap: 244px;
+
+    color: rgb(255, 255, 255);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 31px;
+    text-align: center;
 }
