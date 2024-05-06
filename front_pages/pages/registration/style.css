@@ -1,0 +1,113 @@
+.main-container{
+    /*Это изменение цвета фона*/
+    background-color:  rgb(4, 61, 93);
+}
+
+.registration-logo{
+    /*Задание размеров*/
+    width: 468px;
+    height: 104px;
+    /*Внешние отсутпы от родительского блока(в котором находится)*/
+    margin:2% auto 0 auto;
+}
+
+.registration-logo-pricheson{
+    width: 466px;
+    height: 90px;
+
+    margin: 0 auto;
+
+    color: rgb(255, 255, 255);
+    font-family: Luckiest Guy, sans-serif;
+    font-size: 90px;
+    font-weight: 400;
+    line-height: 90px;
+    /*Ориентация текста*/
+    text-align: center;
+}
+
+.registration-logo-add-words{
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 100%;
+    text-align: center;
+    color: white;
+}
+
+.registration-extra{
+    margin: 5% auto 0.5% auto;
+}
+
+.registration-extra-words{
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 54px;
+    font-weight: 400;
+    color: rgba(35, 182, 132, 1);
+
+    width: 505px;
+    height: 67px;
+    margin: 0 auto 40px;
+}
+
+.registration-container{
+    width: 740px;
+    height: 406px;
+    margin: 0 auto;
+}
+
+.registration-input{
+    width: 740px;
+    height: 75px;
+    margin: 0 auto 32px;
+
+    background: rgb(255, 255, 255);
+    border: 2px solid rgb(35, 182, 132);
+    border-radius: 20px;
+}
+/*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
+.registration-input:hover{
+    box-shadow: inset 0 0 10px #23B684;
+}
+
+.registration-input [placeholder]{
+    color: rgb(196, 196, 196);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    text-align: left;
+
+    width: 459px;
+    height: 37px;
+    margin: 20px;
+}
+
+.registration-registr{
+    box-sizing: border-box;
+    border: 2px solid rgb(35, 182, 132);
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+
+    width: 560px;
+    height: 75px;
+    margin: 0 auto;
+}
+
+/*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
+.registration-registr:hover{
+    box-shadow: inset 0 0 10px #23B684;
+}
+
+.registration-registr-words {
+    color: rgb(35, 182, 132);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
+    text-align: center;
+
+    width: 476px;
+    height: 37px;
+
+    margin: 20px 42px;
+}

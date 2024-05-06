@@ -84,14 +84,19 @@
     border-radius: 20px;
     background: rgb(255, 255, 255);
 }
+
 .all-services-create-button{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+/*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
+.all-services-create-button:hover{
+    box-shadow: inset 0 0 20px #23B684;
+}
+
 .all-services-create-button-link{
-
-
     color: rgb(35, 182, 132);
     font-family: Rubik Mono One, sans-serif;
     font-size: 30px;
