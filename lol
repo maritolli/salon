@@ -18,6 +18,7 @@ https://pixso.net/app/editor/CgIXDr6LWgvnUzHroFk-xQ?file_type=10&icon_type=1&pag
 
 
 
+
 Как запустить реакт у себя?
 1) из папки client вводишь команду "npm install -g npm"
 2) из той же пустой папки client вызываешь команду "npx create-react-app ."   да, точку тоже ставишь это вроде для названия

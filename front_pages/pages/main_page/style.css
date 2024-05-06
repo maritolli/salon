@@ -88,15 +88,14 @@
     border:1px solid #00aaff;
 }
 
-/*надписи внизу. ОНИ СТОЯТ КРИВО*/
+
 .main-little-words{
-    width: 1276px;
+    width: 1300px;
     height: 32px;
 
     margin: 0 auto 0 auto;
     display: flex;
-    /*justify-content: space-between;*/
-    /* не особо решает проблему, но мб*/
+
     gap: 244px;
 
     color: rgb(255, 255, 255);
@@ -105,4 +104,7 @@
     font-weight: 400;
     line-height: 31px;
     text-align: center;
+}
+.third-phrase{
+    margin-left:20px;
 }
