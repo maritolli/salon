@@ -62,7 +62,7 @@
     transition-duration:.2s;
 }
 .date-day-button:hover{
-    text-shadow: 0 0 10px rgb(35, 182, 132);
+    text-shadow: 5px 1px 8px rgb(35, 182, 132);
 }
 
 .date-day-button:focus{

@@ -1,0 +1,62 @@
+.main-container{
+    background: rgb(4, 61, 93);
+}
+
+.client-orders-header{
+    margin: 4% 0 0 6%;
+
+    width: 626px;
+    height: 57px;
+
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 46px;
+    font-weight: 400;
+    line-height: 57px;
+    color: white;
+}
+
+.orders-main-words{
+    width: 100%;
+    height: 86px;
+
+    border-bottom: 3px solid rgb(35, 182, 132);
+    border-top: 3px solid rgb(35, 182, 132);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    color: white;
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 35px;
+}
+
+.client-orders-table{
+    width: 100%;
+    height: 80%;
+    border-collapse: collapse;
+}
+.client-orders-table tr{
+    color: rgb(255, 255, 255);
+    font-family: Rubik Mono One, sans-serif;
+    font-weight: 400;
+}
+.client-orders-table th{
+    padding: 30px 0 30px 106px;
+    font-size: 28px;
+    text-align: left;
+    border-bottom: 3px solid rgb(35, 182, 132);
+    border-top: 3px solid rgb(35, 182, 132);
+}
+.client-orders-table td{
+    font-size: 26px;
+    padding: 30px 0 60px 106px;
+}
+.client-orders-table-agreement-button{
+    padding-left: 70px;
+}
+.client-orders-table-agreement-button:hover{
+    text-shadow: 5px 1px 8px rgb(35, 182, 132);
+}
