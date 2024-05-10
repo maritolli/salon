@@ -1,0 +1,71 @@
+.main-container{
+    background-color:  rgb(4, 61, 93);
+}
+
+.employee-select-container{
+    position: relative;
+    margin: 10% auto;
+    width: 1000px;
+    height: 650px;
+
+    box-sizing: border-box;
+    border: 2px solid rgb(35, 182, 132);
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+}
+
+.employee-select-header{
+    margin: 36px 0 0 75px;
+
+    width: 765px;
+    height: 94px;
+
+    color: rgb(35, 182, 132);
+    font-family: Rubik Mono One, sans-serif;
+}
+.employee-select-header .header-step{
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 50px;
+    width: 170px;
+    height: 43px;
+
+    border-bottom: 2px solid rgb(35, 182, 132);
+}
+.employee-select-header .header-choose{
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 45px;
+
+    margin-top: 8px;
+}
+.employee-select-container .selected-employee{
+    color: rgb(0, 0, 0);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.employee-select-container .selected-employee-specialization{
+    color: rgb(15, 89, 94);
+    font-family: Rubik, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    margin-top: -10px;
+}
+
+.employee-select-container .list-selected-employee{
+    margin: 35px 0 0 75px;
+}
+.employee-select-container .selected-employee-container{
+    margin-bottom: 21px;
+    display: block;
+    text-align: left;
+}
+.employee-select-container .selected-employee-container:hover{
+    border: 2px solid rgb(35, 182, 132);
+    border-radius:50px;
+    padding: 5px;
+}
+

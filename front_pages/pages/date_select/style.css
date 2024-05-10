@@ -15,7 +15,7 @@
 }
 
 .date-select-header{
-    margin: 20px;
+    margin: 36px 0 0 75px;
 
     width: 765px;
     height: 94px;
@@ -36,6 +36,8 @@
     font-size: 36px;
     font-weight: 400;
     line-height: 45px;
+
+    margin-top: 8px;
 }
 
 .date-days-container{
