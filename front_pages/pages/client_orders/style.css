@@ -42,3 +42,55 @@
 .client-orders-table-agreement-button:hover{
     text-shadow: 5px 1px 8px rgb(35, 182, 132);
 }
+/*Стили для всплывающего окна*/
+.client-orders-decline{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 440px;
+    height: 220px;
+
+    box-sizing: border-box;
+    border: 2px solid rgb(35, 182, 132);
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+}
+
+.client-orders-decline-question{
+    margin: 40px auto;
+
+    color: rgb(35, 182, 132);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.client-orders-decline-container{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+}
+
+.client-orders-decline-button{
+    width: 130px;
+    height: 56px;
+
+    box-sizing: border-box;
+    border: 2px solid rgb(35, 182, 132);
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+
+    color: rgb(3, 46, 70);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 32px;
+
+}
