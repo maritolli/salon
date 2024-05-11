@@ -7,6 +7,8 @@ body{
     position: absolute;
     width: 100%;
     min-height: 100% !important;
+    /*Это изменение цвета фона*/
+    background-color:  rgb(4, 61, 93);
 }
 .order-create-button{
     position: absolute;
@@ -34,4 +36,14 @@ body{
 }
 .backwards-button{
     left: 2%;
+}
+
+.exit-button{
+    position: absolute;
+    top: 2.5%;
+    right: 1.5%;
+}
+
+.exit-button:hover{
+    filter: drop-shadow(0 0 10px #23B684);
 }

@@ -1,18 +1,3 @@
-.main-container{
-    /*Это изменение цвета фона*/
-    background-color:  rgb(4, 61, 93);
-}
-
-.exit-button{
-    position: absolute;
-    top: 2.5%;
-    right: 1.5%;
-}
-
-.exit-button:hover{
-    filter: drop-shadow(0 0 10px #23B684);
-}
-
 .enter-logo{
     /*Задание размеров*/
     width: 468px;
