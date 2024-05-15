@@ -7,9 +7,9 @@ body{
     position: absolute;
     width: 100%;
     min-height: 100% !important;
-    /*Это изменение цвета фона*/
     background-color:  rgb(4, 61, 93);
 }
+
 .order-create-button{
     position: absolute;
     bottom: 3%;
@@ -28,12 +28,15 @@ body{
     font-weight: 400;
     line-height: 37px;
 }
+
 .order-create-button:hover{
     box-shadow: inset 0 0 10px #23B684;
 }
+
 .continue-button{
     right: 2%;
 }
+
 .backwards-button{
     left: 2%;
 }
