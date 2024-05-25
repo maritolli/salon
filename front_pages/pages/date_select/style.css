@@ -5,9 +5,9 @@
     height: 650px;
 
     box-sizing: border-box;
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
     border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: var(--main-logo-color);
 }
 
 .date-select-header{
@@ -16,7 +16,7 @@
     width: 765px;
     height: 94px;
 
-    color: rgb(35, 182, 132);
+    color: var(--main-enter-color);
     font-family: Rubik Mono One, sans-serif;
 }
 .date-select-header .header-step{
@@ -26,7 +26,7 @@
     width: 170px;
     height: 43px;
 
-    border-bottom: 2px solid rgb(35, 182, 132);
+    border-bottom: 2px solid var(--main-enter-color);
 }
 .date-select-header .header-choose{
     font-size: 36px;
@@ -60,11 +60,9 @@
     transition-duration:.2s;
 }
 .date-day-button:hover{
-    text-shadow: 5px 1px 8px rgb(35, 182, 132);
+    text-shadow: 5px 1px 8px var(--main-enter-color);
 }
 
 .date-day-button:focus{
-    background:rgb(35, 182, 132);
-
-
+    background: var(--main-enter-color);
 }

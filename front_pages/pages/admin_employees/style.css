@@ -5,7 +5,7 @@
     font-size: 46px;
     font-weight: 400;
     line-height: 57px;
-    color: white;
+    color: var(--main-logo-color);
 }
 
 .all-employee-button{
@@ -14,7 +14,7 @@
 
 .all-clients-button{
     margin-left: 230px;
-    color: rgb(255, 255, 255, 0.5)
+    color: var(--admin-button-inactive-color);
 }
 
 .admin-employee-table{
@@ -29,7 +29,7 @@
 
 .admin-employee-table tr{
     /*стили к каждой строке*/
-    color: rgb(255, 255, 255);
+    color: var(--main-logo-color);
     font-family: Rubik Mono One, sans-serif;
     font-weight: 400;
 }
@@ -43,8 +43,8 @@
     text-align: center;
     font-size: 28px;
     padding: 30px 0 21px 0;
-    border-bottom: 3px solid rgb(35, 182, 132);
-    border-top: 3px solid rgb(35, 182, 132);
+    border-bottom: 3px solid var(--main-enter-color);
+    border-top: 3px solid var(--main-enter-color);
 }
 
 .admin-employee-table td{
@@ -69,7 +69,7 @@
 }
 
 .employee-table-bonus-button:hover{
-    text-shadow: 5px 1px 8px rgb(35, 182, 132);
+    text-shadow: 5px 1px 8px var(--main-enter-color);
 }
 
 /*дальше стили для всплывающего окна, в скелете я его закомментил*/
@@ -83,9 +83,9 @@
     height: 265px;
 
     box-sizing: border-box;
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
     border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: var(--main-logo-color);
 }
 
 .give-bonus-header{
@@ -94,7 +94,7 @@
     width: 356px;
     height: 32px;
 
-    color: rgb(35, 182, 132);
+    color: var(--main-enter-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 26px;
     font-weight: 400;
@@ -108,9 +108,9 @@
     height: 50px;
 
     box-sizing: border-box;
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
     border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: var(--main-logo-color);
 }
 
 .give-bonus-decline-container{
@@ -126,11 +126,11 @@
     height: 56px;
 
     box-sizing: border-box;
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
     border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: var(--main-logo-color);
 
-    color: rgb(3, 46, 70);
+    color: var(--decline-button-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 26px;
     font-weight: 400;
@@ -141,12 +141,12 @@
     width:100%;
     height: 100%;
     text-align: center;
-    color: rgb(35, 182, 132);
+    color: var(--main-enter-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 20px;
     font-weight: 400;
 }
 
 .give-bonus-decline-button:hover{
-    box-shadow: inset 0 0 10px #23B684;
+    box-shadow: inset 0 0 10px var(--main-enter-color);
 }

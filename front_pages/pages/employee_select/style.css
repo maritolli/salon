@@ -5,9 +5,9 @@
     height: 650px;
 
     box-sizing: border-box;
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
     border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: var(--main-logo-color);
 }
 
 .employee-select-header{
@@ -16,7 +16,7 @@
     width: 765px;
     height: 94px;
 
-    color: rgb(35, 182, 132);
+    color: var(--main-enter-color);
     font-family: Rubik Mono One, sans-serif;
 }
 .employee-select-header .header-step{
@@ -26,7 +26,7 @@
     width: 170px;
     height: 43px;
 
-    border-bottom: 2px solid rgb(35, 182, 132);
+    border-bottom: 2px solid var(--main-enter-color);
 }
 .employee-select-header .header-choose{
     font-size: 36px;
@@ -36,14 +36,14 @@
     margin-top: 8px;
 }
 .employee-select-container .selected-employee{
-    color: rgb(0, 0, 0);
+    color: var(--choice-input-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 24px;
     font-weight: 400;
     line-height: 30px;
 }
 .employee-select-container .selected-employee-specialization{
-    color: rgb(15, 89, 94);
+    color: var(--name-employee-color);
     font-family: Rubik, sans-serif;
     font-size: 18px;
     font-weight: 400;
@@ -64,10 +64,10 @@
     border-radius:50px;
 }
 .employee-select-container .selected-employee-container:hover{
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
 }
 .employee-select-container .selected-employee-container:focus{
-    background: rgb(35, 182, 132);
+    background: var(--main-enter-color);
 }
 .employee-select-error{
     width: 527px;
@@ -78,7 +78,7 @@
     top: 50%;
     transform: translate(-50%,-50%);
 
-    color: rgb(0, 0, 0);
+    color: var(--choice-input-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 24px;
     font-weight: 400;

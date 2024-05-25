@@ -13,7 +13,7 @@
     margin: 0 auto;
 
     /*Задание цвета текста, шрифта(чаще всего пишем sans-serif) рамзер, толщина, и высота*/
-    color: rgb(255, 255, 255);
+    color: var(--main-logo-color);
     font-family: Luckiest Guy, sans-serif;
     font-size: 90px;
     font-weight: 400;
@@ -28,7 +28,7 @@
     font-weight: 400;
     line-height: 100%;
     text-align: center;
-    color: white;
+    color: var(--main-logo-color);
 }
 
 .main-question{
@@ -42,7 +42,7 @@
     line-height: 67px;
 
     text-align: center;
-    color: white;
+    color: var(--main-logo-color);
 }
 
 .main-pictures{
@@ -76,11 +76,11 @@
     top: 3%;
 }
 .main-enter-logo-rectangle{
-    color: white;
+    color: var(--main-logo-color);
 }
 .main-enter-logo-rectangle:hover{
-    box-shadow: 0 0 10px #00aaff;
-    border:1px solid #00aaff;
+    box-shadow: 0 0 10px var(--main-enter-color);
+    border:1px solid var(--main-enter-color);
 }
 
 
@@ -93,7 +93,7 @@
 
     gap: 244px;
 
-    color: rgb(255, 255, 255);
+    color: var(--main-logo-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 25px;
     font-weight: 400;

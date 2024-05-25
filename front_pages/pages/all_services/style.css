@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
 
-    color: rgb(255, 255, 255);
+    color: var(--main-logo-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 40px;
     font-weight: 400;
@@ -22,12 +22,12 @@
     height: 905px;
 
     box-sizing: border-box;
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
 }
 .all-services-table{
     width: 100%;
 
-    color: rgb(255, 255, 255);
+    color: var(--main-logo-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 25px;
     font-weight: 400;
@@ -70,11 +70,11 @@
     width: 540px;
     height: 75px;
 
-    border: 2px solid rgb(35, 182, 132);
+    border: 2px solid var(--main-enter-color);
     border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: var(--main-logo-color);
 
-    color: rgb(35, 182, 132);
+    color: var(--main-enter-color);
     font-family: Rubik Mono One, sans-serif;
     font-size: 30px;
     font-weight: 400;
@@ -83,5 +83,5 @@
 
 /*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
 .all-services-create-button:hover{
-    box-shadow: inset 0 0 20px #23B684;
+    box-shadow: inset 0 0 20px var(--main-enter-color);
 }
