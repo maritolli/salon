@@ -4,6 +4,7 @@ const Auth = () => {
     return (
         <div>
             AUTH
+            aflalflafl
         </div>
     );
 };
