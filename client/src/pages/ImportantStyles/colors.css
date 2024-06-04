@@ -1,0 +1,11 @@
+:root{
+    --main-logo-color: white;
+    --main-enter-color: rgb(35, 182, 132);
+    --main-enter-inactive-color: rgb(35, 182, 132, 0.5);
+    --choice-input-color: black;
+    --name-employee-color: rgb(15, 89, 94);
+    --decline-button-color: rgb(3, 46, 70);
+    --admin-button-inactive-color: rgb(255, 255, 255, 0.5);
+    --enter-registr-button-color: rgb(239, 239, 239);
+    --all-background-color: rgb(4, 61, 93);
+}

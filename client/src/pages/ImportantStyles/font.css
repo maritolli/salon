@@ -1,0 +1,20 @@
+@font-face{
+    font-family: "Luckiest Guy";
+    font-style: normal;
+    font-weight: 400;
+    src: url(../../fonts/LuckiestGuy-Regular.ttf) format("truetype");
+}
+
+@font-face{
+    font-family: "Rubik Mono One";
+    font-style: normal;
+    font-weight: 400;
+    src: url(../../fonts/RubikMonoOne-Regular.ttf) format("truetype");
+}
+
+@font-face{
+    font-family: "Rubik";
+    font-style: normal;
+    font-weight: 400;
+    src: url(../../fonts/Rubik-Regular.ttf) format("truetype");
+}

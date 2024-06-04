@@ -1,7 +1,7 @@
 import {AUTH_ROUTE, HISTORY_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, SERVICES_ROUTE} from "./utils/consts";
 import HistoryPage from "./pages/HistoryPage";
-import MainPage from "./pages/MainPage";
-import Auth from "./pages/Auth";
+import MainPage from "./pages/mainPage/MainPage";
+import Auth from "./pages/Auth/Auth";
 import Services from "./pages/Services";
 
 export const authRoutes=[

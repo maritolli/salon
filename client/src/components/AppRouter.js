@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import {authRoutes, publicRoutes} from "../routes";
-import MainPage from "../pages/MainPage";
+import MainPage from "../pages/mainPage/MainPage";
 import {Context} from "../index";
 
 const AppRouter = () => {
