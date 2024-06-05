@@ -1,0 +1,17 @@
+.all-services-table-column-service{
+    width:45%;
+    text-align: left;
+}
+.all-services-table-column-cost{
+    width:20%;
+    text-align: right;
+}
+.all-services-table-column-checkbox{
+    width:35%;
+    text-align: right;
+    padding-right: 130px ;
+}
+.all-services-choose{
+    width: 31px;
+    height: 31px;
+}

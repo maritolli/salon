@@ -1,0 +1,80 @@
+.modal-date-select{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    backdrop-filter: blur(4px);
+    top: 0;
+    left: 0;
+    transform: scale(0);
+}
+.modal-date-select.active{
+   transform: scale(1);
+}
+.date-container{
+    position: relative;
+    margin: 10% auto;
+    width: 1000px;
+    height: 650px;
+
+    box-sizing: border-box;
+    border: 2px solid var(--main-enter-color);
+    border-radius: 20px;
+    background: var(--main-logo-color);
+}
+
+.date-select-header{
+    margin: 36px 0 0 75px;
+
+    width: 765px;
+    height: 94px;
+
+    color: var(--main-enter-color);
+    font-family: Rubik Mono One, sans-serif;
+}
+.date-select-header .header-step{
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 50px;
+    width: 170px;
+    height: 43px;
+
+    border-bottom: 2px solid var(--main-enter-color);
+}
+.date-select-header .header-choose{
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 45px;
+
+    margin-top: 8px;
+}
+
+.date-days-container{
+    margin: 0 auto;
+    width: 950px;
+    height: 364px;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.date-day-button{
+    cursor:pointer;
+    outline:0;
+    border:0;
+    background:transparent;
+    font-family: Rubik Mono One, sans-serif;
+    font-size:22px;
+    line-height: 27px;
+    justify-self:center;
+    align-self:center;
+    padding:5px;
+    border-radius:50px;
+    margin:2px;
+    transition-duration:.2s;
+}
+.date-day-button:hover{
+    text-shadow: 5px 1px 8px var(--main-enter-color);
+}
+
+.date-day-button:focus{
+    background: var(--main-enter-color);
+}
