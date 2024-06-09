@@ -1,19 +1,31 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 
 import './ModalDateSelect.css'
 import {Context} from "../../../index";
+import ModalDateSelectButtonComponent
+    from "../modalsComponents/ModalDateSelectButtonComponent/ModalDateSelectButtonComponent";
 
 
-export default function ModalDateSelect({active, setActive}) {
+export default function ModalDateSelect({activeSelf, setActiveSelf, activeEmployee, setActiveEmployee}) {
     const{current_date} = useContext(Context)
+    const [selectedDate, setSelectedDate] = useState()
+
+    const[disableContinueButton, setDisableContinueButton] = useState(true)
 
     const handleSubmit=(event)=>{
         event.preventDefault()
-        console.log(current_date.Date)
+        setActiveEmployee(true)
+        console.log("Selected date: "+selectedDate)
+    }
+    const handleButtonSubmit = (event)=>{
+        event.preventDefault()
+        setDisableContinueButton(false)
+        setSelectedDate(event.target.textContent)
     }
 
+
     return (
-        <div className = {active? "modal-date-select active":"modal-date-select" }>
+        <div className = {activeSelf? "modal-date-select active":"modal-date-select" }>
             <div className="date-container">
 
                 <div className="date-select-header">
@@ -24,107 +36,25 @@ export default function ModalDateSelect({active, setActive}) {
 
                 <div className="date-days-container">
 
-                <button className="date-day-button">
-                    <time>1.05</time>
-                </button>
+                    {current_date.Date.map(value =>
+                        <ModalDateSelectButtonComponent value ={value.name} handleButtonSubmit = {handleButtonSubmit}/>
+                    )}
 
-                <button className="date-day-button">
-                    <time>2.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>3.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>4.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>5.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>6.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>7.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>8.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>9.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>10.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>11.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>12.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>13.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>14.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>15.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>16.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>17.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>18.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>19.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>20.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>21.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>22.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>23.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>24.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>25.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>26.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>27.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>28.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>29.05</time>
-                </button>
-                <button className="date-day-button">
-                    <time>30.05</time>
-                </button>
+                </div>
 
-
-            </div>
-
-                <form onSubmit={handleSubmit}><button className="continue-button order-create-button" type="submit"
-                onClick={()=>setActive(false)}>
+                <form onSubmit={handleSubmit}>
+                    <button
+                        className="continue-button order-create-button"
+                        type="submit"
+                        onClick = {()=>setActiveSelf(false)}
+                        disabled={disableContinueButton}
+                    >
                     далее
-                </button></form>
+                    </button>
+                </form>
+
                 <button className="backwards-button order-create-button" type="submit"
-                        onClick="location.href='../all_services/index.html'">назад
+                        onClick = {()=>setActiveSelf(false)}>назад
                 </button>
 
             </div>

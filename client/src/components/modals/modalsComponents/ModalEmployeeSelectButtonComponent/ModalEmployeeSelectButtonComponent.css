@@ -1,0 +1,34 @@
+.employee-select-container .selected-employee{
+    color: var(--choice-input-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.employee-select-container .selected-employee-specialization{
+    color: var(--name-employee-color);
+    font-family: Rubik, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    margin-top: -7px;
+}
+
+.employee-select-container .list-selected-employee{
+    margin: 35px 0 0 75px;
+}
+.employee-select-container .selected-employee-container{
+    margin-bottom: 21px;
+    display: block;
+    text-align: left;
+
+    height: 60px;
+    padding: 0 10px 0 15px;
+    border-radius:50px;
+}
+.employee-select-container .selected-employee-container:hover{
+    border: 2px solid var(--main-enter-color);
+}
+.employee-select-container .selected-employee-container:focus{
+    background: var(--main-enter-color);
+}

@@ -1,4 +1,4 @@
-.modal-date-select{
+.modal-employee-select{
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -7,10 +7,10 @@
     left: 0;
     transform: scale(0);
 }
-.modal-date-select.active{
-   transform: scale(1);
+.modal-employee-select.active-employee{
+    transform: scale(1);
 }
-.date-container{
+.employee-select-container{
     position: relative;
     margin: 10% auto;
     width: 1000px;
@@ -22,7 +22,7 @@
     background: var(--main-logo-color);
 }
 
-.date-select-header{
+.employee-select-header{
     margin: 36px 0 0 75px;
 
     width: 765px;
@@ -31,7 +31,7 @@
     color: var(--main-enter-color);
     font-family: Rubik Mono One, sans-serif;
 }
-.date-select-header .header-step{
+.employee-select-header .header-step{
     font-size: 40px;
     font-weight: 400;
     line-height: 50px;
@@ -40,7 +40,7 @@
 
     border-bottom: 2px solid var(--main-enter-color);
 }
-.date-select-header .header-choose{
+.employee-select-header .header-choose{
     font-size: 36px;
     font-weight: 400;
     line-height: 45px;
@@ -48,10 +48,22 @@
     margin-top: 8px;
 }
 
-.date-days-container{
-    margin: 0 auto;
-    width: 950px;
-    height: 364px;
-    display:grid;
-    grid-template-columns: repeat(7, 1fr);
+.employee-select-error{
+    width: 527px;
+    height: 149px;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+    color: var(--choice-input-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0;
+    text-align: center;
 }
+
+

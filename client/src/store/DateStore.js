@@ -7,7 +7,7 @@ export default class DateStore{
         for(let i=0;i<30;++i){
             date.setDate(date.getDate() + 1)
             let dayMonth = date.getDate().toString() +"."+   ((date.getMonth()+1) > 9 ? date.getMonth(): "0"+(date.getMonth()+1))
-            this._dates.push(dayMonth);
+            this._dates.push({id:(i+1), name: dayMonth});
         }
         makeAutoObservable(this)
     }

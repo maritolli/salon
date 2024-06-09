@@ -3,15 +3,6 @@ import React, {useState} from 'react';
 import './ServiceComponent.css'
 
 export default function ServiceComponent(props) {
-    const [isChecked, setChecked] = useState(false);
-    const currentId = props.id_service
-    const setServices = props.setServices;
-
-    const handleChange = (event) => {
-        setServices(currentId)
-        setChecked(!isChecked)
-    }
-
     return (
         <tr className="all-services-table-line">
 
@@ -26,8 +17,9 @@ export default function ServiceComponent(props) {
             <td className="all-services-table-column all-services-table-column-checkbox">
                 <input
                     type="checkbox"
+                    value={props.id_service}
                     className="all-services-choose"
-                    onChange={handleChange}
+                    onChange={props.handleCheckBoxChange}
                 />
             </td>
 

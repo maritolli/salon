@@ -1,0 +1,6 @@
+.client-orders-table-agreement-button{
+    padding-left: 70px;
+}
+.client-orders-table-agreement-button:hover{
+    text-shadow: 5px 1px 8px var(--main-enter-color);
+}

@@ -27,3 +27,8 @@ https://pixso.net/app/editor/CgIXDr6LWgvnUzHroFk-xQ?file_type=10&icon_type=1&pag
 
 ---Интерестинг заметка: можно вынести стили цветов(зачем-то) на будущее.
 25.05 Описаную выше заметку добавил.
+
+Решение проблемы будущих нас: нужно будет перерисовывать окно шага 2 выбора сотрудника.
+Мы сначала возьмём count(distinct specialization) from employee_service where service in(chosen_service)
+И столько раз будем перерисовывать страницу делая запрос вида: КАК ПЕРЕРИСОВАТЬ ЧАСТЬ СТРАНИЦЫ В ЦИКЛЕ????
+select employee_name from employee_service where service == service[i]

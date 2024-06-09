@@ -1,0 +1,65 @@
+.history-employee-words{
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 46px;
+    font-weight: 400;
+    line-height: 57px;
+    color: var(--main-logo-color);
+
+    width: 626px;
+    height: 57px;
+
+    margin: 4% 100px 10px;
+}
+
+.history-employee-table{
+    /*растягиваем таблицу по всей ширине, чтобы полоска из
+    дизайна была во весь экран
+    border-collapse: collapse - по сути убирает разрыв границ
+    блоков в таблице*/
+    width: 100%;
+    height: 80%;
+    border-collapse: collapse;
+}
+
+.history-employee-table tr{
+    /*стили к каждой строке*/
+    color: var(--main-logo-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.history-employee-table th{
+    /*Стили к заголовку
+    красивая линия из дизайна - граница заголовка
+    ширину даем такую, чтобы они равномерно были по всему
+    пространству*/
+    width: 34%;
+    text-align: center;
+    font-size: 28px;
+    padding: 30px 0 21px 0;
+    border-bottom: 3px solid var(--main-enter-color);
+    border-top: 3px solid var(--main-enter-color);
+}
+
+.history-employee-table td{
+    /*стили обычного элемента столбца
+    падингом толкем их, чтобы к друг другу не липли*/
+    font-size: 26px;
+    padding-top: 30px;
+}
+
+/*nth-child это обращение ко всей колонке, а цифра - это номер*/
+.history-employee-table td:nth-child(1){
+    padding-left: 130px;
+}
+
+.history-employee-table td:nth-child(2){
+    padding-left: 100px;
+    text-align: left;
+}
+
+.history-employee-table td:nth-child(3){
+    text-align: right;
+    padding-right: 200px;
+}

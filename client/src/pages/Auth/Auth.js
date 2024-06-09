@@ -9,10 +9,11 @@ import '../ImportantStyles/reset.css'
 import MainLogoComponent from "../../components/pagesComponents/MainLogoComponent/MainLogoComponent";
 import ExitButtonComponent from "../../components/pagesComponents/ExitButtonComponent/ExitButtonComponent";
 import {useLocation, useNavigate} from "react-router-dom";
-import {AUTH_ROUTE, LOGIN_ROUTE} from "../../utils/consts";
+import {AUTH_ROUTE, HISTORY_ROUTE, LOGIN_ROUTE} from "../../utils/consts";
 import {observer} from "mobx-react-lite";
 
 const Auth = observer(() => {
+
     const location = useLocation();
     const navigate = useNavigate();
     const isLogin = location.pathname === AUTH_ROUTE;
@@ -21,6 +22,12 @@ const Auth = observer(() => {
         event.preventDefault();
         navigate(LOGIN_ROUTE);
     }
+
+    const handleEnterAccount = async(event)=>{
+        event.preventDefault();
+        navigate(HISTORY_ROUTE);
+    }
+
     return (
         <div className="main-container">
             <ExitButtonComponent/>
@@ -37,7 +44,7 @@ const Auth = observer(() => {
                         <div className="enter-input"><input placeholder="пароль"/></div>
                     </div>
                     <button type="submit" className="enter-button"
-                            onClick="location.href = '../main_page/index.html'">войти
+                            onClick={handleEnterAccount}>войти
                     </button>
                 </div>
                 <form onSubmit={handleSubmitRegistration}>
@@ -64,7 +71,7 @@ const Auth = observer(() => {
                         </div>
 
                         <button type="submit" className="registration-button"
-                                onClick="location.href ='../main_page/index.html'">зарегистрироваться
+                                onClick={handleEnterAccount}>зарегистрироваться
                         </button>
                     </div>
                 </div>

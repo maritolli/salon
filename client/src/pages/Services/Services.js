@@ -11,26 +11,28 @@ import ServiceComponent from "../../components/pagesComponents/ServiceComponent/
 import ModalDateSelect from "../../components/modals/ModalDateSelect/ModalDateSelect";
 
 import {Context} from "../../index";
+import ModalEmployeeSelect from "../../components/modals/ModalEmployeeSelect/ModalEmployeeSelect";
 
 const Services = () => {
     const {service} = useContext(Context)
-    const [modalActive, setModalActive] = useState(false)
+    const [activeDate, setActiveDate] = useState(false)
+    const [myService, setMyService] = useState([])
+    const [activeEmployee, setActiveEmployee] = useState(false )
 
-    let all_services=[]
-    let index
-    function setServices(id_service) {
-        index = all_services.indexOf(id_service);
-        if(index !== -1){
-            all_services.splice(index, 1);
+    const handleCheckBoxChange =(event)=>{
+        const value = event.target.value;
+        if(event.target.checked){
+            setMyService([...myService,value]);
         }
         else{
-            all_services.push(id_service);
+            setMyService(myService.filter((ss)=>ss!==value));
         }
     }
 
+
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log('Selected services:', all_services.sort());
+        console.log('Selected services:', myService);
     };
     return (
         <div className="main-container">
@@ -55,20 +57,32 @@ const Services = () => {
                             name = {service.name}
                             cost = {service.cost}
                             id_service = {service.id}
-                            setServices = {setServices}
+                            handleCheckBoxChange = {handleCheckBoxChange}
                         />
                     )}
 
                 </table>
 
                 <form onSubmit={handleSubmit}>
-                <button className="all-services-create-button" type="submit" onClick={()=>setModalActive(true)} >
+                <button className="all-services-create-button" type="submit" onClick={()=>setActiveDate(true)} >
                     Оформить заказ
                 </button></form>
 
             </div>
 
-            <ModalDateSelect active = {modalActive} setActive={setModalActive}/>
+            <ModalDateSelect
+                activeSelf = {activeDate}
+                setActiveSelf={setActiveDate}
+                activeEmployee={activeEmployee}
+                setActiveEmployee={setActiveEmployee}
+            />
+
+            <ModalEmployeeSelect
+                activeEmployee={activeEmployee}
+                setActiveEmployee={setActiveEmployee}
+                activeDate={activeDate}
+                setActiveDate={setActiveDate}
+            />
 
         </div>
     );
