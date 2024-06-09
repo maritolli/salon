@@ -3,24 +3,42 @@ const ApiError = require('../error/ApiError');
 const Employee = require("../models/models");
 const { Op, QueryTypes, fn, col} = require("sequelize");
 
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const generateJwt = (id, login) => {
+    return jwt.sign(
+        {id, login}, //центр часть токена, куда данные вшиваются
+        process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
+        {expiresIn: '24h'} //сколько живет токен
+    )
+}
 
 class EmployeeController{
-
     async create(req, res){
-        const {Fname, Login, Password, Specialization, Salary, Bonus} = req.body;
+        const {Fname, Login, Password, Specialization, Salary, Bonus} = req.body; //получили из тела запроса
+        if (!Fname || !Login || !Password){ //если что-то не ввели
+            return next(ApiError.badRequest('Некорректный email, пароль или имя сотрудника'))
+        }
+        const candidate = await employees.findOne({where: {Login}}) //проверка на существование такого же логина
+        if (candidate){ //если вернулся и непустой
+            return next(ApiError.badRequest('Сотрудник с таким логином уже существует'))
+        }
+        const hashPassword = await bcrypt.hash(Password, 5) //хэшируем пароль (и сколько раз)
+
         const Employee = await employees.create({
             fname: Fname,
             login: Login,
-            password: Password,
+            password: hashPassword,
             specialization: Specialization,
             salary: Salary,
             bonus: Bonus
         });
+
         if(Employee){
             Employee.role=false
             await Employee.save()
         }
-
 
         //////////////////////////////////////////////////////////////////////////
         //Следующий кусок кода добавляет информацию о сотруднике                //
@@ -72,9 +90,21 @@ class EmployeeController{
 
         return res.json(Employee);
     }
-    async login(req, res){
 
+    async login(req, res, next){
+        const {login, password} = req.body
+        const Employee = await employees.findOne({where: {login}})
+        if (!Employee){
+            return next(ApiError.internal('Пользователь не найден'))
+        }
+        let comparePassword = await bcrypt.compareSync(password, employees.password);
+        if (!comparePassword){
+            return next(ApiError.internal('Указан неверный пароль'))
+        }
+        const token = generateJwt(employees.ClientIdClient, employees.login)
+        return res.json({token})
     }
+
     async check(req, res){
         //На будущее варианты как можно обновлять строку, upsert нах**, он не работает
         //const update_role = await employees.update({role: false}, {where: {id_employee: 1}})
