@@ -59,6 +59,7 @@ class EmployeeController{
                 })
             }
         }
+
         else if(local_specialization === 'Массажист'){
             const all_services = await services.findAll( {where: {
                     service_name: {[Op.like]: {
@@ -72,7 +73,7 @@ class EmployeeController{
                 })
             }
         }
-        else{
+        else if(local_specialization === 'Мастер маникюра'){
             const all_services = await services.findAll( {where: {
                     service_name: {[Op.like]: {
                             [Op.any]: ['%Маникюр%', '%Педикюр%']
@@ -90,9 +91,6 @@ class EmployeeController{
     }
 
     async login(req, res, next){
-
-        let b;
-
         const {Login, Password} = req.body
         const Employee = await employees.findOne({where: {login: Login}})
         if (!Employee){
