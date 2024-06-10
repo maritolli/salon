@@ -4,6 +4,7 @@ const EmployeeController = require('../controllers/EmployeeController')
 
 
 router.post('/', EmployeeController.create)
+router.post('/login', EmployeeController.login)
 router.get('/',EmployeeController.check)
 router.get('/delete',EmployeeController.delete)
 router.get('/salary',EmployeeController.show_salary)

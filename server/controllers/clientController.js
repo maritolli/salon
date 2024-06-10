@@ -4,14 +4,6 @@ const ApiError = require('../error/ApiError');
 const bcrypt = require ('bcrypt')
 const jwt = require ('jsonwebtoken')
 
-const generateJwt = (id, login) => {
-    return jwt.sign(
-        {id, login}, //центр часть токена, куда данные вшиваются
-        process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
-        {expiresIn: '24h'} //сколько живет токен
-    )
-}
-
 class ClientController{
     async registration(req, res, next){
         const {Fname, Login, Password} = req.body; //получили из тела запроса
@@ -24,7 +16,11 @@ class ClientController{
         }
         const hashPassword = await bcrypt.hash(Password, 5) //хэшируем пароль (и сколько раз)
         const Client = await clients.create({Fname, Login, Password: hashPassword});
-        const token = generateJwt(clients.ClientIdClient, clients.login)
+        const token = jwt.sign(
+            {id: Client.id_client, Login}, //центр часть токена, куда данные вшиваются
+            process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
+            {expiresIn: '24h'} //сколько живет токен
+        )
         return res.json(Client);
     }
 
@@ -32,13 +28,17 @@ class ClientController{
         const {Login, Password} = req.body;
         const Client = await clients.findOne({where: {Login}})
         if (!Client){
-            return next(ApiError.internal('Пользователь не найден'))
+            return next(ApiError.badRequest('Пользователь не найден'))
         }
-        let comparePassword = await bcrypt.compareSync(Password, clients.Password);
+        let comparePassword = await bcrypt.compareSync(Password, Client.Password)
         if (!comparePassword){
-            return next(ApiError.internal('Указан неверный пароль'))
+            return next(ApiError.badRequest('Указан неверный пароль'))
         }
-        const token = generateJwt(clients.ClientIdClient, clients.Login);
+        const token = jwt.sign(
+            {id: Client.id_client, Login}, //центр часть токена, куда данные вшиваются
+            process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
+            {expiresIn: '24h'} //сколько живет токен
+        )
         return res.json({token})
     }
 

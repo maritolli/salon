@@ -6,21 +6,13 @@ const { Op, QueryTypes, fn, col} = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const generateJwt = (id, login) => {
-    return jwt.sign(
-        {id, login}, //центр часть токена, куда данные вшиваются
-        process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
-        {expiresIn: '24h'} //сколько живет токен
-    )
-}
-
 class EmployeeController{
-    async create(req, res){
+    async create(req, res, next){
         const {Fname, Login, Password, Specialization, Salary, Bonus} = req.body; //получили из тела запроса
         if (!Fname || !Login || !Password){ //если что-то не ввели
             return next(ApiError.badRequest('Некорректный email, пароль или имя сотрудника'))
         }
-        const candidate = await employees.findOne({where: {Login}}) //проверка на существование такого же логина
+        const candidate = await employees.findOne({where: {login: Login}}) //проверка на существование такого же логина
         if (candidate){ //если вернулся и непустой
             return next(ApiError.badRequest('Сотрудник с таким логином уже существует'))
         }
@@ -34,6 +26,12 @@ class EmployeeController{
             salary: Salary,
             bonus: Bonus
         });
+
+        const token = jwt.sign(
+            {id: Employee.id_employee, Login}, //центр часть токена, куда данные вшиваются
+            process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
+            {expiresIn: '24h'} //сколько живет токен
+        )
 
         if(Employee){
             Employee.role=false
@@ -88,20 +86,27 @@ class EmployeeController{
             }
         }
 
-        return res.json(Employee);
+        return res.json({token});
     }
 
     async login(req, res, next){
-        const {login, password} = req.body
-        const Employee = await employees.findOne({where: {login}})
+
+        let b;
+
+        const {Login, Password} = req.body
+        const Employee = await employees.findOne({where: {login: Login}})
         if (!Employee){
-            return next(ApiError.internal('Пользователь не найден'))
+            return next(ApiError.badRequest('Пользователь не найден'))
         }
-        let comparePassword = await bcrypt.compareSync(password, employees.password);
+        let comparePassword = await bcrypt.compareSync(Password, Employee.password);
         if (!comparePassword){
-            return next(ApiError.internal('Указан неверный пароль'))
+            return next(ApiError.badRequest('Указан неверный пароль'))
         }
-        const token = generateJwt(employees.ClientIdClient, employees.login)
+        const token = jwt.sign(
+            {id: Employee.id_employee, Login}, //центр часть токена, куда данные вшиваются
+            process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
+            {expiresIn: '24h'} //сколько живет токен
+        )
         return res.json({token})
     }
 
