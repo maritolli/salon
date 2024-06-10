@@ -17,8 +17,6 @@ for (i=0, i<длина строки, ++i){
 https://pixso.net/app/editor/CgIXDr6LWgvnUzHroFk-xQ?file_type=10&icon_type=1&page-id=0%3A1
 
 
-
-
 Как запустить реакт у себя?
 1) из папки client вводишь команду "npm install -g npm"
 2) из той же пустой папки client вызываешь команду "npx create-react-app ."   да, точку тоже ставишь это вроде для названия
@@ -32,3 +30,7 @@ https://pixso.net/app/editor/CgIXDr6LWgvnUzHroFk-xQ?file_type=10&icon_type=1&pag
 Мы сначала возьмём count(distinct specialization) from employee_service where service in(chosen_service)
 И столько раз будем перерисовывать страницу делая запрос вида: КАК ПЕРЕРИСОВАТЬ ЧАСТЬ СТРАНИЦЫ В ЦИКЛЕ????
 select employee_name from employee_service where service == service[i]
+
+////////
+В БЕКЕ НАПИСАТЬ В КОНСОЛЬ (в сервере): npm i jsonwebtoken bcrypt
+///////
