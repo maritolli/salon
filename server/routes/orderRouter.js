@@ -1,10 +1,11 @@
 const Router = require('express')
 const router = new Router()
 const orderController = require('../controllers/orderController')
+const authMiddleware = require("../middleware/authMiddleware");
 
 
-router.post('/', orderController.create)
-router.post('/delete', orderController.delete)
-router.get('/', orderController.get)
+router.post('/', authMiddleware, orderController.create)
+router.post('/delete', authMiddleware, orderController.delete)
+router.get('/', authMiddleware,orderController.get)
 
 module.exports = router

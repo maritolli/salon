@@ -36,13 +36,13 @@ class EmployeeController{
             bonus: Bonus
         });
 
-        let a
         if(Employee){
-            Employee.role = false
+            Employee.role = 'EMPLOYEE'
+            let a
             await Employee.save()
         }
 
-        const token = generateJwt(Employee.id_employee, Employee.Login, Employee.role)
+        const token = generateJwt(Employee.id_employee, Employee.login, Employee.role)
 
         //////////////////////////////////////////////////////////////////////////
         //Следующий кусок кода добавляет информацию о сотруднике                //
@@ -106,7 +106,7 @@ class EmployeeController{
         if (!comparePassword){
             return next(ApiError.badRequest('Указан неверный пароль'))
         }
-        const token = generateJwt(Employee.id_employee, Employee.Login)
+        const token = generateJwt(Employee.id_employee, Employee.login, Employee.role)
         return res.json({token})
     }
 
@@ -116,18 +116,14 @@ class EmployeeController{
         const token = generateJwt(req.id, req.login)
         return res.json({token})
 
-        ////////////////////
-        //от маши: это че?//
-        ////////////////////
-
-        //На будущее варианты как можно обновлять строку, upsert нах**, он не работает
-        //const update_role = await employees.update({role: false}, {where: {id_employee: 1}})
-        // const update_specialization = await employees.findAll()
-        // for(let employee of update_specialization){
+        //КАК ОБНОВИТЬ СТРОКУ
+        //const update_role = await employees.update({role: 'EMPLOYEE'}, {where: {id_employee: {[Op.not]: 10} }})
+        //const update_specialization = await employees.findAll()
+        //for (let employee of update_specialization){
         //     employee.specialization= "Парикмахер"
         //     await employee.save()
-        // }
-        // return res.json("ALL HAVE WORKED CORRECTLY AND DATABASE CHANGED")
+        //}
+        //return res.json("ALL HAVE WORKED CORRECTLY AND DATABASE CHANGED")
 
         //Select... where service_name like any [...]
     }

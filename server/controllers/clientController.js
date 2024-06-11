@@ -50,6 +50,7 @@ class ClientController{
     }
 
     async show_orders(req, res){
+        //const token = generateJwt(req.id, req.login)
         const All_orders = await orders.findAll({where:{ClientIdClient: req.query.id}})
         console.log("COOL")
         return res.json(All_orders)

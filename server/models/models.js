@@ -46,7 +46,7 @@ const employees = sequelize.define("Employees", {
     specialization: {type: DataTypes.STRING, allowNull: false},
     salary: {type: DataTypes.INTEGER, defaultValue: 0},
     bonus: {type: DataTypes.INTEGER, defaultValue: 0},
-    role: {type: DataTypes.BOOLEAN},
+    role: {type: DataTypes.STRING},
 }, {
         timestamps: false
     })

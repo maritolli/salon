@@ -3,10 +3,10 @@ const ApiError = require('../error/ApiError');
 const {Op} = require("sequelize");
 
 
-class OrderController{
+class OrderController{      //////БРАТЬ КАК МАССИВ (УСЛУГА И СОТРУДНИК)/////
     //добавление заказа
     //пока есть такая идея: заказ будет создаваться с 1 или несколькими услугами, так вот
-    //добавляя услугу мы будет конкатенировать к id_service услугу и знак and
+    //добавляя услугу мы будем конкатенировать к id_service услугу и знак and
     // Пример: человек выбрал стрижку мужскую и бороды id_service="1and2"
     async create(req, res){
         const {Id_client, Id_service, Id_employee, Order_date } = req.body;
