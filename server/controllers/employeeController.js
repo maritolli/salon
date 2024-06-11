@@ -6,6 +6,15 @@ const { Op, QueryTypes, fn, col} = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+//отдельно вынесенная функция создания токена
+const generateJwt = (id, login, role) => {
+    return jwt.sign(
+        {id, login, role}, //центр часть токена, куда данные вшиваются
+        process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
+        {expiresIn: '24h'} //сколько живет токен
+    )
+}
+
 class EmployeeController{
     async create(req, res, next){
         const {Fname, Login, Password, Specialization, Salary, Bonus} = req.body; //получили из тела запроса
@@ -27,16 +36,13 @@ class EmployeeController{
             bonus: Bonus
         });
 
-        const token = jwt.sign(
-            {id: Employee.id_employee, Login}, //центр часть токена, куда данные вшиваются
-            process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
-            {expiresIn: '24h'} //сколько живет токен
-        )
-
+        let a
         if(Employee){
-            Employee.role=false
+            Employee.role = false
             await Employee.save()
         }
+
+        const token = generateJwt(Employee.id_employee, Employee.Login, Employee.role)
 
         //////////////////////////////////////////////////////////////////////////
         //Следующий кусок кода добавляет информацию о сотруднике                //
@@ -100,15 +106,20 @@ class EmployeeController{
         if (!comparePassword){
             return next(ApiError.badRequest('Указан неверный пароль'))
         }
-        const token = jwt.sign(
-            {id: Employee.id_employee, Login}, //центр часть токена, куда данные вшиваются
-            process.env.SECRET_KEY, //любой секретный ключ, задаем его в .env
-            {expiresIn: '24h'} //сколько живет токен
-        )
+        const token = generateJwt(Employee.id_employee, Employee.Login)
         return res.json({token})
     }
 
     async check(req, res){
+        //проверка на авторизацию ЧЕРЕЗ ТОКЕН
+        //и создает новый токен, если чел постоянно пользуется акком для безопасности
+        const token = generateJwt(req.id, req.login)
+        return res.json({token})
+
+        ////////////////////
+        //от маши: это че?//
+        ////////////////////
+
         //На будущее варианты как можно обновлять строку, upsert нах**, он не работает
         //const update_role = await employees.update({role: false}, {where: {id_employee: 1}})
         // const update_specialization = await employees.findAll()
@@ -120,9 +131,10 @@ class EmployeeController{
 
         //Select... where service_name like any [...]
     }
+
     async delete(req, res){
         const Employee = await employees.destroy({where: {id_employee: req.query.id}});
-        await employees_services.destroy({where: {id_employee: req.query.id_employee}})//в этой таюлице тоже удалим сотрудника
+        await employees_services.destroy({where: {id_employee: req.query.id_employee}})//в этой таблице тоже удалим сотрудника
         return res.json(Employee)
     }
     async show_salary(req, res){
