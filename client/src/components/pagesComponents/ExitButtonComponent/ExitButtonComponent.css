@@ -1,0 +1,9 @@
+.exit-button{
+    position: absolute;
+    top: 2.5%;
+    right: 1.5%;
+}
+
+.exit-button:hover{
+    filter: drop-shadow(0 0 10px var(--main-enter-color));
+}

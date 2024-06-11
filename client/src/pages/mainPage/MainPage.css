@@ -1,0 +1,72 @@
+.main-question{
+    margin: 5% auto 0.5% auto;
+}
+
+.main-question-text{
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 54px;
+    font-weight: 400;
+    line-height: 67px;
+
+    text-align: center;
+    color: var(--main-logo-color);
+}
+
+.main-pictures{
+    margin: 0 auto;
+
+    /*просто позволяет нам вертеть объекты внутри данного, как мы хотим*/
+    display: flex;
+    /*задаем расстояние между объектами (наши три картинки)*/
+    gap: 150px;
+    /*Этот параметр отвечает за то, где они будут находиться по горизонтали*/
+    justify-content: center;
+}
+
+.main-image{
+    width: 360px;
+    height: 360px;
+
+    border: 1px solid #032E46;
+}
+/*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
+.main-image:hover{
+    /*Это тень(как именно влияют параметры - я хз)*/
+    box-shadow:0 0 15px #000000;
+}
+
+.main-enter-logo-link{
+    /*Если position: absolute, то блоку вс равно внутри чего он находится, он будет позиционировать себя от краёв страницы.
+    То есть он не привязан ни к какому другому блоку, а как бы сам по себе.*/
+    position: absolute;
+    right: 2%;
+    top: 3%;
+}
+.main-enter-logo-rectangle{
+    color: var(--main-logo-color);
+}
+.main-enter-logo-rectangle:hover{
+    box-shadow: 0 0 10px var(--main-enter-color);
+    border:1px solid var(--main-enter-color);
+}
+
+
+.main-little-words{
+    width: 1300px;
+    height: 32px;
+
+    margin: 0 auto 0 auto;
+    display: flex;
+
+    gap: 244px;
+
+    color: var(--main-logo-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 31px;
+    text-align: center;
+}
+.third-phrase{
+    margin-left:20px;
+}

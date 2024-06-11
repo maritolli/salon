@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <!--Подключение стиля самой страницы, стилей сбрасывающих стили браузера, общих стилей для всех, шрифты-->
+    <link rel ="stylesheet" href ="style.css">
+    <link rel ="stylesheet" href ="../../styles/reset.css">
+    <link rel ="stylesheet" href ="../../styles/common.css">
+    <link rel="stylesheet" href="../../styles/font.css">
+    <link rel="stylesheet" href="../../styles/colors.css">
+    <title>Employee page</title>
+</head>
+<body>
+<div class="main-container">
+
+    <a class = "exit-button" href="../main_page/index.html"><img src="../../images/Кнопка%20выхода.svg" alt="no img"/></a>
+
+    <div class="employee-words">
+        <p class = "employee-words-header"> это <span style = "color: var(--main-enter-color)">твои</span> клиенты</p>
+    </div>
+
+    <!--Почему таблица?
+    Удобно двигать объекты относительно друг друга.
+    Это в коде выглядит намного компактней.-->
+    <table class="employee-table">
+        <!-- tr - тег строки(их у нас здесь 4 вместе с заголовком)
+        th - тег заголовка(к нему нам нужны особые стили)
+        td - тег элемента в строке-->
+        <tr><th>Имя</th><th>Список услуг</th><th>Дата последнего посещения</th></tr>
+        <tr><td>иванова анна</td><td>маникюр<br />педикюр<br />мытье волос<br />окрашивание сложное</td><td>02.05.2024</td><td></tr>
+        <tr><td>петров пётр</td><td>стрижка короткие</td><td>01.01.2009</td></tr>
+        <tr><td>расимов абдул</td><td>окрашивание</td><td>29.05.2025</td></tr>
+    </table>
+
+</div>
+</body>
+</html>

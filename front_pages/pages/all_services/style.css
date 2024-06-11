@@ -1,0 +1,87 @@
+.all-services-header{
+    width: 87.5%;
+
+    margin: 4% auto 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--main-logo-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 50px;
+    text-align: center;
+
+}
+
+.all-services-container{
+    margin: 1% auto 0 auto;
+    position: relative;
+    width: 1780px;
+    height: 905px;
+
+    box-sizing: border-box;
+    border: 2px solid var(--main-enter-color);
+}
+.all-services-table{
+    width: 100%;
+
+    color: var(--main-logo-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 31px;
+
+    text-align: center;
+    border-spacing: 30px;
+}
+.all-services-table-line{
+
+}
+
+.all-services-table-column{
+
+
+}
+.all-services-table-column-service{
+    width:45%;
+    text-align: left;
+}
+.all-services-table-column-cost{
+    width:20%;
+    text-align: right;
+}
+.all-services-table-column-checkbox{
+    width:35%;
+    text-align: right;
+    padding-right: 130px ;
+}
+.all-services-choose{
+    width: 31px;
+    height: 31px;
+}
+
+.all-services-create-button{
+    position: absolute;
+    left: 50%;
+    bottom: -2%;
+    transform: translate(-50%, -50%);
+    width: 540px;
+    height: 75px;
+
+    border: 2px solid var(--main-enter-color);
+    border-radius: 20px;
+    background: var(--main-logo-color);
+
+    color: var(--main-enter-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
+}
+
+/*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
+.all-services-create-button:hover{
+    box-shadow: inset 0 0 20px var(--main-enter-color);
+}

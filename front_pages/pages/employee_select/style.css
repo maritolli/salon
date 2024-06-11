@@ -1,0 +1,90 @@
+.employee-select-container{
+    position: relative;
+    margin: 10% auto;
+    width: 1000px;
+    height: 650px;
+
+    box-sizing: border-box;
+    border: 2px solid var(--main-enter-color);
+    border-radius: 20px;
+    background: var(--main-logo-color);
+}
+
+.employee-select-header{
+    margin: 36px 0 0 75px;
+
+    width: 765px;
+    height: 94px;
+
+    color: var(--main-enter-color);
+    font-family: Rubik Mono One, sans-serif;
+}
+.employee-select-header .header-step{
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 50px;
+    width: 170px;
+    height: 43px;
+
+    border-bottom: 2px solid var(--main-enter-color);
+}
+.employee-select-header .header-choose{
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 45px;
+
+    margin-top: 8px;
+}
+.employee-select-container .selected-employee{
+    color: var(--choice-input-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.employee-select-container .selected-employee-specialization{
+    color: var(--name-employee-color);
+    font-family: Rubik, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    margin-top: -7px;
+}
+
+.employee-select-container .list-selected-employee{
+    margin: 35px 0 0 75px;
+}
+.employee-select-container .selected-employee-container{
+    margin-bottom: 21px;
+    display: block;
+    text-align: left;
+
+    height: 60px;
+    padding: 0 10px 0 15px;
+    border-radius:50px;
+}
+.employee-select-container .selected-employee-container:hover{
+    border: 2px solid var(--main-enter-color);
+}
+.employee-select-container .selected-employee-container:focus{
+    background: var(--main-enter-color);
+}
+.employee-select-error{
+    width: 527px;
+    height: 149px;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+    color: var(--choice-input-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+

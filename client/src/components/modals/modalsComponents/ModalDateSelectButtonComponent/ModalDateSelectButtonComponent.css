@@ -1,0 +1,22 @@
+.date-day-button{
+    cursor:pointer;
+    outline:0;
+    border:0;
+    background:transparent;
+    font-family: Rubik Mono One, sans-serif;
+    font-size:22px;
+    line-height: 27px;
+    justify-self:center;
+    align-self:center;
+    padding:5px;
+    border-radius:50px;
+    margin:2px 2px 2px 2px;
+    transition-duration:.2s;
+}
+.date-day-button:hover{
+    text-shadow: 5px 1px 8px var(--main-enter-color);
+}
+
+.date-day-button:focus{
+    background: var(--main-enter-color);
+}
