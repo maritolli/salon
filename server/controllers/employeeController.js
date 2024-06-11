@@ -38,7 +38,6 @@ class EmployeeController{
 
         if(Employee){
             Employee.role = 'EMPLOYEE'
-            let a
             await Employee.save()
         }
 
