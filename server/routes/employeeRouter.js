@@ -5,9 +5,9 @@ const checkRoleMiddleware = require('../middleware/checkRoleMiddleware')
 
 //МОГУТ БЫТЬ ПРОБЛЕМЫ ИЗ-ЗА TRUE В checkRoleMiddleware
 
-router.post('/', EmployeeController.create)
+router.post('/registration', EmployeeController.create)
 router.post('/login', EmployeeController.login)
-router.get('/',EmployeeController.check)
+router.get('/check',EmployeeController.check)
 router.get('/delete', checkRoleMiddleware ('ADMIN'), EmployeeController.delete)
 router.get('/salary', checkRoleMiddleware ("ADMIN"), EmployeeController.show_salary)
 router.get('/orders', checkRoleMiddleware ('ADMIN'), EmployeeController.show_orders)

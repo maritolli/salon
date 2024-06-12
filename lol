@@ -38,3 +38,5 @@ select employee_name from employee_service where service == service[i]
 В clientController есть метод check. для его проверки в постмане необходимо сделать гет запрос,
 перейти при этом в headers(), добавить поле key Authorization, а в value написать "Bearer + токен, который
 при вводе выводится в консоль".
+
+12.06 в клиента надо установить npm i jwt-decode

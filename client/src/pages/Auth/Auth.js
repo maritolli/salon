@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import './Auth.css'
 import '../ImportantStyles/colors.css'
@@ -11,12 +11,17 @@ import ExitButtonComponent from "../../components/pagesComponents/ExitButtonComp
 import {useLocation, useNavigate} from "react-router-dom";
 import {AUTH_ROUTE, HISTORY_ROUTE, LOGIN_ROUTE} from "../../utils/consts";
 import {observer} from "mobx-react-lite";
+import {registration, login} from "../../http/clientAPI";
 
 const Auth = observer(() => {
 
     const location = useLocation();
     const navigate = useNavigate();
     const isLogin = location.pathname === AUTH_ROUTE;
+
+    const[Fname, setFname] = useState("");
+    const[Login, setLogin] = useState("");
+    const[Password, setPassword] = useState("");
 
     const handleSubmitRegistration = async (event)=>{
         event.preventDefault();
@@ -25,7 +30,15 @@ const Auth = observer(() => {
 
     const handleEnterAccount = async(event)=>{
         event.preventDefault();
-        navigate(HISTORY_ROUTE);
+        //navigate(HISTORY_ROUTE);
+        if(isLogin){
+            const response = await login()
+            console.log(response)
+        }
+        else{
+            const response = await registration(Fname, Login, Password)
+            console.log(response)
+        }
     }
 
     return (
@@ -40,8 +53,17 @@ const Auth = observer(() => {
 
                 <div className="enter-container">
                     <div className="inputs-container">
-                        <div className="enter-input"><input placeholder="логин"/></div>
-                        <div className="enter-input"><input placeholder="пароль"/></div>
+                        <div className="enter-input"><input
+                            placeholder="логин"
+                            value={Fname}
+                            onChange={event => setLogin(event.target.value)}
+                        /></div>
+                        <div className="enter-input"><input
+                            placeholder="пароль"
+                            value={Fname}
+                            onChange={event=>setPassword(event.target.value)}
+                            type="password"
+                        /></div>
                     </div>
                     <button type="submit" className="enter-button"
                             onClick={handleEnterAccount}>войти
@@ -65,9 +87,22 @@ const Auth = observer(() => {
 
                     <div className="registration-container">
                         <div className="inputs-container">
-                            <div className="registration-input"><input placeholder="ваша фамилия и имя"/></div>
-                            <div className="registration-input"><input placeholder="логин"/></div>
-                            <div className="registration-input"><input placeholder="пароль"/></div>
+                            <div className="registration-input"><input
+                                placeholder="ваша фамилия и имя"
+                                value={Fname}
+                                onChange={event=>setFname(event.target.value)}
+                            /></div>
+                            <div className="registration-input"><input
+                                placeholder="логин"
+                                value={Login}
+                                onChange={event=>setLogin(event.target.value)}
+                            /></div>
+                            <div className="registration-input"><input
+                                placeholder="пароль"
+                                value={Password}
+                                onChange={event=>setPassword(event.target.value)}
+                                type="password"
+                            /></div>
                         </div>
 
                         <button type="submit" className="registration-button"

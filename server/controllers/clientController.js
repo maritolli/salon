@@ -20,13 +20,16 @@ class ClientController{
             return next(ApiError.badRequest('Некорректный email, пароль или имя пользователя'))
         }
         const candidate = await clients.findOne({where: {Login}}) //проверка на существование пользователя
+
         if (candidate){ //если вернулся и непустой
             return next(ApiError.badRequest('Пользователь с таким логином уже существует'))
+
         }
+
         const hashPassword = await bcrypt.hash(Password, 5) //хэшируем пароль (и сколько раз)
         const Client = await clients.create({Fname, Login, Password: hashPassword});
         const token = generateJwt(Client.id_client, Client.Login)
-        return res.json(Client);
+        return res.json({token});
     }
 
     async login(req, res, next){

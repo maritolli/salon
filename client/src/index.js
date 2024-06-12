@@ -9,6 +9,7 @@ import EmployeeStore from "./store/EmployeeStore";
 export const Context = createContext(null)
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement); // createRoot(container!) if you use TypeScript
+
 root.render(
     <Context.Provider value={{
         user: new UserStore(),
