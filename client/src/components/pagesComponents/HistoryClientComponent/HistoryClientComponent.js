@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './HistoryClientComponent.css'
 import ExitButtonComponent from "../ExitButtonComponent/ExitButtonComponent";
 import ModalClientOrderDecline from "../../modals/ModalClientOrderDecline/ModalClientOrderDecline";
 import ClientOrdersComponent from "./ClientOrdersComponent/ClientOrdersComponent";
+import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
 
-export default function HistoryClientComponent() {
+const HistoryClientComponent=observer(() =>{
     const [orderDecline, setOrderDecline] = React.useState(false);
-
+    const {orders} = useContext(Context)
     const handleOrderDecline = (event) => {
         event.preventDefault();
         setOrderDecline(true)
     }
+
     return (
         <div className="main-container">
 
@@ -27,8 +30,17 @@ export default function HistoryClientComponent() {
                     <th>К оплате</th>
                     <th>Отменить?</th>
                 </tr>
-                <ClientOrdersComponent date ={"20.06.2024"} services={["маникюр"]} cost ={"1200 рублей"} handleOrderDecline={handleOrderDecline}/>
-                <ClientOrdersComponent date ={"02.02.2024"} services={["маникюр","педикюр","обновляем длинные волосы"]} cost ={"7200 рублей"} handleOrderDecline={handleOrderDecline}/>
+
+                {orders.ClientOrders.map(data =>
+                    <ClientOrdersComponent date ={data.order_date}
+                                            services ={data.services}
+                                            cost ={data.total_sum}
+                                            key={data.id_order}
+                                            handleOrderDecline={handleOrderDecline}
+                    />)}
+                {/*{userHistory.map((order) => (<ClientOrdersComponent date={order.date} services={order.services} cost ={order.cost}  handleOrderDecline={handleOrderDecline}/>))}*/}
+                {/*<ClientOrdersComponent date ={test_var} services={test_var} cost ={test_var} handleOrderDecline={handleOrderDecline}/>*/}
+                {/*<ClientOrdersComponent date ={"02.02.2024"} services={["маникюр","педикюр","обновляем длинные волосы"]} cost ={"7200 рублей"} handleOrderDecline={handleOrderDecline}/>*/}
 
 
             </table>
@@ -37,4 +49,5 @@ export default function HistoryClientComponent() {
 
         </div>
     )
-}
+})
+export default HistoryClientComponent

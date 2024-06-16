@@ -112,7 +112,7 @@ class EmployeeController{
     async check(req, res){
         //проверка на авторизацию ЧЕРЕЗ ТОКЕН
         //и создает новый токен, если чел постоянно пользуется акком для безопасности
-        const token = generateJwt(req.id, req.login)
+        const token = generateJwt(req.id, req.login, req.role)
         return res.json({token})
 
         //КАК ОБНОВИТЬ СТРОКУ

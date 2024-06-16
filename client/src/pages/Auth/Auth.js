@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import './Auth.css'
 import '../ImportantStyles/colors.css'
@@ -12,16 +12,26 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {AUTH_ROUTE, HISTORY_ROUTE, LOGIN_ROUTE} from "../../utils/consts";
 import {observer} from "mobx-react-lite";
 import {registration, login} from "../../http/clientAPI";
+import {employeeLogin} from "../../http/employeeAPI";
+import {Context} from "../../index";
 
 const Auth = observer(() => {
+    const {user} = useContext(Context)
 
     const location = useLocation();
     const navigate = useNavigate();
     const isLogin = location.pathname === AUTH_ROUTE;
 
+    const[isEmployee, setIsEmployee] = useState(false);
     const[Fname, setFname] = useState("");
     const[Login, setLogin] = useState("");
     const[Password, setPassword] = useState("");
+
+    const handleEmployeeEnter = (event)=>{
+        event.preventDefault()
+        if(event.target.checked){setIsEmployee(true)}
+        else {setIsEmployee(false)}
+    }
 
     const handleSubmitRegistration = async (event)=>{
         event.preventDefault();
@@ -29,16 +39,28 @@ const Auth = observer(() => {
     }
 
     const handleEnterAccount = async(event)=>{
-        event.preventDefault();
-        //navigate(HISTORY_ROUTE);
-        if(isLogin){
-            const response = await login()
-            console.log(response)
+        try{
+            event.preventDefault();
+            let data
+            if(isLogin){
+                if(isEmployee){
+                    data = await employeeLogin(Login, Password)
+                }
+                else{
+                    data  = await login(Login, Password)
+                }
+
+            }
+            else{
+                data = await registration(Fname, Login, Password)
+            }
+            user.setUser(data);
+            user.setIsAuth(true)
+            navigate(HISTORY_ROUTE + '/' + data.id);
+        }catch(error){
+            alert(error.response.data.message)
         }
-        else{
-            const response = await registration(Fname, Login, Password)
-            console.log(response)
-        }
+
     }
 
     return (
@@ -55,16 +77,21 @@ const Auth = observer(() => {
                     <div className="inputs-container">
                         <div className="enter-input"><input
                             placeholder="логин"
-                            value={Fname}
+                            value={Login}
                             onChange={event => setLogin(event.target.value)}
                         /></div>
                         <div className="enter-input"><input
                             placeholder="пароль"
-                            value={Fname}
+                            value={Password}
                             onChange={event=>setPassword(event.target.value)}
                             type="password"
                         /></div>
                     </div>
+                    <label className="is-employee-enter-label">
+                        <input className="is-employee-enter-checkbox" type="checkbox" onChange={handleEmployeeEnter}/>
+                        <span className="fake-is-employee-enter-label">Сотрудник?</span>
+
+                    </label>
                     <button type="submit" className="enter-button"
                             onClick={handleEnterAccount}>войти
                     </button>

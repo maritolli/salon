@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {jwtDecode} from "jwt-decode";
+import {useParams} from 'react-router-dom';
 
 import './HistoryPage.css'
 import '../ImportantStyles/colors.css'
@@ -14,11 +16,29 @@ import AdminClientComponent from "../../components/pagesComponents/AdminClientCo
 import HistoryClientComponent from "../../components/pagesComponents/HistoryClientComponent/HistoryClientComponent";
 import HistoryEmployeeComponent
     from "../../components/pagesComponents/HistoryEmployeeComponent/HistoryEmployeeComponent";
+import HistoryExitButtonComponent
+    from "../../components/pagesComponents/HistoryExitButtonComponent/HistoryExitButtonComponent";
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
+import {useNavigate} from "react-router-dom";
+import {AUTH_ROUTE} from "../../utils/consts";
+import {fetchClientOrders} from "../../http/orderAPI";
 
-const HistoryPage = () => {
+const HistoryPage = observer(() => {
+    const {user, orders}= useContext(Context)
+    const navigate = useNavigate()
     const [giveBonusActive, setGiveBonusActive] = useState(false);
     const [employeeHistory, setEmployeeHistory] = useState(true);
-    const [currentUserId, setCurrentUserId] = useState(1);//костыль для переключения по страницам историй
+    const [userHistory, setUserHistory] = useState([]);
+    const {id} = useParams()
+
+    const cur_user = jwtDecode(localStorage.getItem('token'))
+
+    if(id){
+        useEffect(() => {
+            fetchClientOrders(id).then(data=> orders.setClientOrders(data))
+        });
+    }
 
     const handleChangeHistory = (event)=>{
         event.preventDefault();
@@ -26,8 +46,15 @@ const HistoryPage = () => {
         else{setEmployeeHistory(false)}
     }
 
-    switch(currentUserId){
-        case 1:
+    const handleExitAccount =(event)=>{
+        event.preventDefault();
+        user.setUser({})
+        user.setIsAuth(false)
+        navigate(AUTH_ROUTE)
+    }
+
+    switch(cur_user.role){
+        case "ADMIN":
             return (
                 <div className="main-container">
 
@@ -86,20 +113,22 @@ const HistoryPage = () => {
 
                     <ModalAdminEmployee giveBonusActive={giveBonusActive} setGiveBonusActive={setGiveBonusActive}/>
 
+                    <HistoryExitButtonComponent handleExitAccount={handleExitAccount}/>
+
                 </div>
             )
-        case 2:
-            return(
-                <HistoryClientComponent/>
-            )
-        case 3:
+        case "EMPLOYEE":
             return(
                 <HistoryEmployeeComponent/>
+            )
+        case undefined:
+            return(
+                <HistoryClientComponent />
             )
         default:
             return (<div>ЕГОР ПЕЙДЖ</div>)
     }
 
-};
+});
 
 export default HistoryPage;

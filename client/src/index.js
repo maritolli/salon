@@ -5,6 +5,7 @@ import UserStore from "./store/UserStore";
 import ServiceStore from "./store/ServiceStore";
 import DateStore from "./store/DateStore";
 import EmployeeStore from "./store/EmployeeStore";
+import OrderStore from "./store/OrderStore";
 
 export const Context = createContext(null)
 const rootElement = document.getElementById('root');
@@ -15,7 +16,8 @@ root.render(
         user: new UserStore(),
         service: new ServiceStore(),
         current_date: new DateStore(),
-        employee: new EmployeeStore()
+        employee: new EmployeeStore(),
+        orders: new OrderStore()
     }}>
         <App />
     </Context.Provider>

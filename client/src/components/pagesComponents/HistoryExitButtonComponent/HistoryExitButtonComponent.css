@@ -1,0 +1,22 @@
+.history-exit-button-component{
+    position: absolute;
+    left: 50%;
+    bottom: 2%;
+    transform: translate(-50%, -50%);
+
+    width: 440px;
+    height: 64px;
+    border: 2px solid rgb(35, 182, 132);
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+
+    color: var(--main-enter-color);
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+}
+/*Псевдокласс hover определяет, что будет с блоком, когда на него наведут курсор*/
+.history-exit-button-component:hover{
+    box-shadow: inset 0 0 10px var(--main-enter-color);
+}

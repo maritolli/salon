@@ -14,7 +14,7 @@ export const authRoutes=[
         Component: Services
     },
     {
-        path: HISTORY_ROUTE,
+        path: HISTORY_ROUTE + '/:id',
         Component: HistoryPage
     },
     {
