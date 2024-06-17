@@ -5,8 +5,9 @@ import ModalClientOrderDecline from "../../modals/ModalClientOrderDecline/ModalC
 import ClientOrdersComponent from "./ClientOrdersComponent/ClientOrdersComponent";
 import {Context} from "../../../index";
 import {observer} from "mobx-react-lite";
+import HistoryExitButtonComponent from "../HistoryExitButtonComponent/HistoryExitButtonComponent";
 
-const HistoryClientComponent=observer(() =>{
+const HistoryClientComponent=observer((props) =>{
     const [orderDecline, setOrderDecline] = React.useState(false);
     const {orders} = useContext(Context)
     const handleOrderDecline = (event) => {
@@ -33,7 +34,7 @@ const HistoryClientComponent=observer(() =>{
 
                 {orders.ClientOrders.map(data =>
                     <ClientOrdersComponent date ={data.order_date}
-                                            services ={data.services}
+                                            services ={data.Positions}
                                             cost ={data.total_sum}
                                             key={data.id_order}
                                             handleOrderDecline={handleOrderDecline}
@@ -46,7 +47,7 @@ const HistoryClientComponent=observer(() =>{
             </table>
 
             <ModalClientOrderDecline orderDecline={orderDecline} setOrderDecline={setOrderDecline}/>
-
+            <HistoryExitButtonComponent handleExitAccount={props.handleExitAccount}/>
         </div>
     )
 })

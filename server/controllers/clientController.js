@@ -1,4 +1,4 @@
-const {clients, orders} = require('../models/models')
+const {clients, orders, position, services} = require('../models/models')
 const ApiError = require('../error/ApiError');
 
 const bcrypt = require ('bcrypt')
@@ -55,7 +55,19 @@ class ClientController{
     async show_orders(req, res){
         //const token = generateJwt(req.id, req.login)
         const {id} = req.params
-        const All_orders = await orders.findAll({where:{ClientIdClient: id}})
+        const All_orders = await orders.findAll({
+            where:{ClientIdClient: id},
+            include:{
+                model: position,
+                attributes:['ServiceIdService'],
+                required: true,
+                include:{
+                    model: services,
+                    attributes: ['service_name'],
+                    required: true
+                }
+            }
+        })
         console.log(All_orders)
         return res.json(All_orders)
 

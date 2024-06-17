@@ -56,6 +56,7 @@ const Auth = observer(() => {
             }
             user.setUser(data);
             user.setIsAuth(true)
+            console.log(user.isAuth)
             navigate(HISTORY_ROUTE + '/' + data.id);
         }catch(error){
             alert(error.response.data.message)

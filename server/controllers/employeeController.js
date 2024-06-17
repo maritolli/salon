@@ -141,13 +141,14 @@ class EmployeeController{
         //Вообще я тут проверял на то, чтобы конкретный сотрудник дважды в одном заказе не был
         //Но с человеческой точки зрения если он две услуги делает, то это двойная работа
         //Следовательно это будет учитываться
+        const {id} = req.params
         const results = await orders.findAll({
             attributes:['id_order', 'order_date'],
             include: [
                 {
                     model: position,
                     attributes: ['EmployeeIdEmployee'],
-                    where: {EmployeeIdEmployee: req.query.id},
+                    where: {EmployeeIdEmployee: id},
                     required: true, //inner join
                     include:{
                         model: services,
@@ -171,7 +172,7 @@ class EmployeeController{
         const Best_employees = await position.findAll({
             include:{
                 model: employees,
-                attributes:['fname'],
+                attributes:['fname','bonus'],
                 required: true
             },
             //интересная функция fn, которая агр. функцию делает по столбцу
@@ -193,6 +194,30 @@ class EmployeeController{
         Chosen_employee.bonus = bonus
         await Chosen_employee.save()
         return res.json(Chosen_employee)
+    }
+
+    async show_clients(req, res){
+        // const Al_clients = await clients.findAll({
+        //     attributes:['Fname'],
+        //     include:{
+        //         model: orders,
+        //         attributes:[[fn('count', col('ClientIdClient')), 'visits_count']],
+        //         group:['Clients.id_client']
+        //     },
+        //
+        // })
+        const All_clients = await orders.findAll({
+            attributes:[
+                [fn('count', col('ClientIdClient')), 'visits_count'],
+                [fn('max',col('order_date')), 'max_count']
+            ],
+            include:{
+                model: clients,
+                attributes:['Fname'],
+            },
+            group:['Client.id_client', 'Orders.ClientIdClient']
+        })
+        return res.json(All_clients)
     }
 }
 

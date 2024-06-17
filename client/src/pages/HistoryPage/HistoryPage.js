@@ -22,14 +22,13 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useNavigate} from "react-router-dom";
 import {AUTH_ROUTE} from "../../utils/consts";
-import {fetchClientOrders} from "../../http/orderAPI";
+import {fetchAdminClients, fetchAdminEmployees, fetchClientOrders} from "../../http/orderAPI";
 
 const HistoryPage = observer(() => {
     const {user, orders}= useContext(Context)
     const navigate = useNavigate()
     const [giveBonusActive, setGiveBonusActive] = useState(false);
     const [employeeHistory, setEmployeeHistory] = useState(true);
-    const [userHistory, setUserHistory] = useState([]);
     const {id} = useParams()
 
     const cur_user = jwtDecode(localStorage.getItem('token'))
@@ -39,7 +38,14 @@ const HistoryPage = observer(() => {
             fetchClientOrders(id).then(data=> orders.setClientOrders(data))
         });
     }
-
+    if(cur_user.role==="ADMIN"){
+        useEffect(()=>{
+            fetchAdminClients().then(data=> orders.setAdminClients(data))
+        })
+        useEffect(() => {
+            fetchAdminEmployees().then(data=> orders.setAdminEmployees(data))
+        }, []);
+    }
     const handleChangeHistory = (event)=>{
         event.preventDefault();
         if(!employeeHistory){setEmployeeHistory(true)}
@@ -79,24 +85,33 @@ const HistoryPage = observer(() => {
                                 <th>Активность</th>
                                 <th>Премия</th>
                             </tr>
-                            <AdminEmployeeComponent name = {"иванова анна"}
-                                                    activity = {2}
-                                                    bonus ={"7200 рублей"}
-                                                    giveBonusActive={giveBonusActive}
-                                                    setGiveBonusActive={setGiveBonusActive}
-                            />
-                            <AdminEmployeeComponent name = {"петров пётр"}
-                                                    activity = {1000}
-                                                    bonus ={"71200 рублей"}
-                                                    giveBonusActive={giveBonusActive}
-                                                    setGiveBonusActive={setGiveBonusActive}
-                            />
-                            <AdminEmployeeComponent name = {"расимов абдул"}
-                                                    activity = {0}
-                                                    bonus ={"0 рублей"}
-                                                    giveBonusActive={giveBonusActive}
-                                                    setGiveBonusActive={setGiveBonusActive}
-                            />
+                            {orders._adminEmployees.map(data=>
+                                <AdminEmployeeComponent
+                                    name={data.Employee.fname}
+                                    activity ={data.orders_count}
+                                    bonus ={data.Employee.bonus}
+                                    giveBonusActive={giveBonusActive}
+                                    setGiveBonusActive={setGiveBonusActive}
+                                />
+                            )}
+                            {/*<AdminEmployeeComponent name = {"иванова анна"}*/}
+                            {/*                        activity = {2}*/}
+                            {/*                        bonus ={"7200 рублей"}*/}
+                            {/*                        giveBonusActive={giveBonusActive}*/}
+                            {/*                        setGiveBonusActive={setGiveBonusActive}*/}
+                            {/*/>*/}
+                            {/*<AdminEmployeeComponent name = {"петров пётр"}*/}
+                            {/*                        activity = {1000}*/}
+                            {/*                        bonus ={"71200 рублей"}*/}
+                            {/*                        giveBonusActive={giveBonusActive}*/}
+                            {/*                        setGiveBonusActive={setGiveBonusActive}*/}
+                            {/*/>*/}
+                            {/*<AdminEmployeeComponent name = {"расимов абдул"}*/}
+                            {/*                        activity = {0}*/}
+                            {/*                        bonus ={"0 рублей"}*/}
+                            {/*                        giveBonusActive={giveBonusActive}*/}
+                            {/*                        setGiveBonusActive={setGiveBonusActive}*/}
+                            {/*/>*/}
 
                         </table>
                         : <table className="admin-client-table">
@@ -105,9 +120,16 @@ const HistoryPage = observer(() => {
                                 <th>Количество посещений</th>
                                 <th>Дата последнего посещения</th>
                             </tr>
-                            <AdminClientComponent name = {"смирнов валерий"} activity ={4} date ={"02.05.2024"}/>
-                            <AdminClientComponent name = {"зазуля олег"} activity ={1} date ={"21.02.2024"}/>
-                            <AdminClientComponent name = {"криштиану рональдо"} activity ={1000} date ={"21.06.2024"}/>
+                            {orders._adminClents.map(data =>
+                                <AdminClientComponent
+                                name = {data.Client.Fname}
+                                activity = {data.visits_count}
+                                date = {data.max_count}
+
+                            />)}
+                            {/*<AdminClientComponent name = {"смирнов валерий"} activity ={4} date ={"02.05.2024"}/>*/}
+                            {/*<AdminClientComponent name = {"зазуля олег"} activity ={1} date ={"21.02.2024"}/>*/}
+                            {/*<AdminClientComponent name = {"криштиану рональдо"} activity ={1000} date ={"21.06.2024"}/>*/}
                         </table>
                     }
 
@@ -119,12 +141,16 @@ const HistoryPage = observer(() => {
             )
         case "EMPLOYEE":
             return(
-                <HistoryEmployeeComponent/>
+                <HistoryEmployeeComponent handleExitAccount={handleExitAccount}/>
+
             )
         case undefined:
-            return(
-                <HistoryClientComponent />
-            )
+            if(cur_user.id){
+                return(
+                    <HistoryClientComponent handleExitAccount={handleExitAccount}/>
+                )
+            }
+            return (<div>ЕГОР ПЕЙДЖ</div>)
         default:
             return (<div>ЕГОР ПЕЙДЖ</div>)
     }
