@@ -11,6 +11,7 @@ const App =  observer(() => {
     const {user} = useContext(Context)
     const[loading, setLoading] = useState(true);
 
+   
    if(jwtDecode(localStorage.getItem('token')).role !==undefined){
        useEffect(()=>{
            employeeCheck().then(data=>{

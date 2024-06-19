@@ -1,0 +1,14 @@
+.error-page-header{
+    font-family: Rubik Mono One, sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 67px;
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+
+    text-align: center;
+    color: var(--main-logo-color);
+}
