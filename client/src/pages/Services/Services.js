@@ -32,16 +32,14 @@ const Services = observer(() => {
         }
     });
 
-    const handleCheckBoxChange =(event)=>{
+    const handleCheckBoxChange =(event)=> {
         const value = event.target.value;
-        if(event.target.checked){
-            setMyService([...myService,value]);
-        }
-        else{
-            setMyService(myService.filter((ss)=>ss!==value));
+        if (event.target.checked) {
+            setMyService([...myService, value]);
+        } else {
+            setMyService(myService.filter((ss) => ss !== value));
         }
     }
-
 
     const handleSubmit = (event) => {
         event.preventDefault()

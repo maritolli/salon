@@ -16,10 +16,6 @@ app.use('/api', router)
 //Обработка ошибок всегда в конце, последний Middleware
 app.use(errorHandler)
 
-// app.get('/',(req, res)=>{
-//     res.status(200).json({message: 'Congrats! It is working!'}) //в случае, если все работает, это пойдет на экран
-// })
-
 const start = async () => {
     try {
         await sequelize.authenticate()

@@ -69,9 +69,7 @@ class ClientController{
                 }
             }
         })
-        console.log(All_orders)
         return res.json(All_orders)
-
     }
 }
 
