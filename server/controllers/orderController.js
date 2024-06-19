@@ -48,6 +48,7 @@ class OrderController{      //////БРАТЬ КАК МАССИВ (УСЛУГА �
                         })
                         check_service_ind.push(Id_service[j])
                         console.log(JSON.stringify(`Created position with id service: ${Id_service[j]} ,id_employee: ${Id_employee[i]}`))
+                        break;
                     }
                 }
             }
@@ -78,8 +79,8 @@ class OrderController{      //////БРАТЬ КАК МАССИВ (УСЛУГА �
     }
 
     async delete(req, res){
-        const Position = await position.destroy({where:{OrderIdOrder: req.query.id_order}})
-        const Orders = await orders.destroy( {where:{id_order: req.query.id_order}});
+        const Position = await position.destroy({where:{OrderIdOrder: req.body.id_order}})
+        const Orders = await orders.destroy( {where:{id_order: req.body.id_order}});
         return res.json("Deleted")
     }
 }

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './HistoryClientComponent.css'
 import ExitButtonComponent from "../ExitButtonComponent/ExitButtonComponent";
 import ModalClientOrderDecline from "../../modals/ModalClientOrderDecline/ModalClientOrderDecline";
@@ -8,13 +8,15 @@ import {observer} from "mobx-react-lite";
 import HistoryExitButtonComponent from "../HistoryExitButtonComponent/HistoryExitButtonComponent";
 
 const HistoryClientComponent=observer((props) =>{
-    const [orderDecline, setOrderDecline] = React.useState(false);
+    const [orderDecline, setOrderDecline] = useState(false);
+    const [chosenOrder, setChosenOrder] = useState();
     const {orders} = useContext(Context)
     const handleOrderDecline = (event) => {
         event.preventDefault();
+        setChosenOrder(event.target.id)
         setOrderDecline(true)
     }
-
+    console.log(orders.ClientOrders)
     return (
         <div className="main-container">
 
@@ -33,7 +35,8 @@ const HistoryClientComponent=observer((props) =>{
                 </tr>
 
                 {orders.ClientOrders.map(data =>
-                    <ClientOrdersComponent date ={data.order_date}
+                    <ClientOrdersComponent id_ord={data.id_order}
+                                            date ={data.order_date}
                                             services ={data.Positions}
                                             cost ={data.total_sum}
                                             key={data.id_order}
@@ -46,7 +49,10 @@ const HistoryClientComponent=observer((props) =>{
 
             </table>
 
-            <ModalClientOrderDecline orderDecline={orderDecline} setOrderDecline={setOrderDecline}/>
+            <ModalClientOrderDecline
+                chosenOrder = {chosenOrder}
+                orderDecline={orderDecline}
+                setOrderDecline={setOrderDecline}/>
             <HistoryExitButtonComponent handleExitAccount={props.handleExitAccount}/>
         </div>
     )

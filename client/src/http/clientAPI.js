@@ -13,6 +13,11 @@ export const login = async (Login, Password) => {
     return jwtDecode(data.token)
 }
 
+export const deleteOrder = async(id_order)=>{
+    const {data} = await $authHost.post('api/order/delete', {id_order})
+    return data;
+}
+
 export const check = async () => {
     const {data} = await $authHost.get('api/client/auth')
     localStorage.setItem('token', data.token)

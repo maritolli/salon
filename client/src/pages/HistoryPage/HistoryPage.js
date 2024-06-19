@@ -21,14 +21,16 @@ import HistoryExitButtonComponent
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useNavigate} from "react-router-dom";
-import {AUTH_ROUTE} from "../../utils/consts";
+import {AUTH_ROUTE, MAIN_ROUTE} from "../../utils/consts";
 import {fetchAdminClients, fetchAdminEmployees, fetchClientOrders} from "../../http/orderAPI";
+import ERROR_PAGE from "../../components/pagesComponents/ERROR_PAGE/ERROR_PAGE";
 
 const HistoryPage = observer(() => {
     const {user, orders}= useContext(Context)
     const navigate = useNavigate()
     const [giveBonusActive, setGiveBonusActive] = useState(false);
     const [employeeHistory, setEmployeeHistory] = useState(true);
+    const [employeeIdBonus, setEmployeeIdBonus] = useState()
     const {id} = useParams()
 
     const cur_user = jwtDecode(localStorage.getItem('token'))
@@ -87,6 +89,8 @@ const HistoryPage = observer(() => {
                             </tr>
                             {orders._adminEmployees.map(data=>
                                 <AdminEmployeeComponent
+                                    setEmployeeIdBonus ={setEmployeeIdBonus}
+                                    id_emp ={data.EmployeeIdEmployee}
                                     name={data.Employee.fname}
                                     activity ={data.orders_count}
                                     bonus ={data.Employee.bonus}
@@ -133,26 +137,33 @@ const HistoryPage = observer(() => {
                         </table>
                     }
 
-                    <ModalAdminEmployee giveBonusActive={giveBonusActive} setGiveBonusActive={setGiveBonusActive}/>
+                    <ModalAdminEmployee
+                        employeeIdBonus={employeeIdBonus}
+                        giveBonusActive={giveBonusActive}
+                        setGiveBonusActive={setGiveBonusActive}/>
 
                     <HistoryExitButtonComponent handleExitAccount={handleExitAccount}/>
 
                 </div>
             )
         case "EMPLOYEE":
+            if(cur_user.id ==id){
             return(
                 <HistoryEmployeeComponent handleExitAccount={handleExitAccount}/>
 
-            )
+            )}
+            return <ERROR_PAGE/>
         case undefined:
-            if(cur_user.id){
+            if(cur_user.id ==id){
                 return(
                     <HistoryClientComponent handleExitAccount={handleExitAccount}/>
                 )
             }
-            return (<div>ЕГОР ПЕЙДЖ</div>)
+
+            return <ERROR_PAGE/>
         default:
-            return (<div>ЕГОР ПЕЙДЖ</div>)
+
+            return <ERROR_PAGE/>
     }
 
 });

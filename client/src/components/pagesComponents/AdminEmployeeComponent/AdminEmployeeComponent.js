@@ -4,6 +4,7 @@ import './AdminEmployeeComponent.css'
 export default function AdminEmployeeComponent(props) {
     const handleGiveBonus = (event)=>{
         event.preventDefault();
+        props.setEmployeeIdBonus(props.id_emp)
         props.setGiveBonusActive(!props.giveBonusActive)
     }
 

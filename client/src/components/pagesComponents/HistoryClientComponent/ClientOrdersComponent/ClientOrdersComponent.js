@@ -17,7 +17,8 @@ export default function ClientOrdersComponent(props) {
             <td>{positions.length===1 ? <p>{positions[0].Service.service_name}</p>: positions.map((service)=><p>{service.Service.service_name}</p>) }</td>
                 <td>{props.cost}</td>
             <td>
-                <button type="submit"
+                <button id={props.id_ord}
+                        type="submit"
                         className="client-orders-table-agreement-button"
                         onClick={props.handleOrderDecline}
                         style ={isPastDate() ? {color: "var(--client-decline-order-impossible)"}:{}}

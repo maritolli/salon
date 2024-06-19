@@ -17,3 +17,8 @@ export const employeeCheck = async () => {
     localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }
+export const giveBonusEmployee= async (Id_employee, bonus)=>{
+    const {data} = await $authHost.post('api/employee/bonus', {Id_employee, bonus})
+
+    return data
+}
