@@ -11,7 +11,6 @@ const App =  observer(() => {
     const {user} = useContext(Context)
     const[loading, setLoading] = useState(true);
 
-   
    if(jwtDecode(localStorage.getItem('token')).role !==undefined){
        useEffect(()=>{
            employeeCheck().then(data=>{
@@ -19,19 +18,24 @@ const App =  observer(() => {
                user.setIsAuth(true)
            }).finally(()=>setLoading(false))
        })
-   }else{
+
+   }else if (jwtDecode(localStorage.getItem('token')).id !==undefined){
        useEffect(()=>{
            check().then(data =>{
                user.setUser(true);
                user.setIsAuth(true);
            }).finally(()=>setLoading(false))
        })
+
+   }else{
+       user.setUser(false);
+       user.setIsAuth(false);
    }
 
     if(loading){
         return <div>Loading...</div>
     }
-
+    console.log("FJOIAHFOAHFOAOF")
     return (
         <BrowserRouter>
             <AppRouter />

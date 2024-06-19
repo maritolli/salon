@@ -54,6 +54,7 @@ const Auth = observer(() => {
             else{
                 data = await registration(Fname, Login, Password)
             }
+            localStorage.setItem('auth', 'true')
             user.setUser(data);
             user.setIsAuth(true)
             console.log(user.isAuth)

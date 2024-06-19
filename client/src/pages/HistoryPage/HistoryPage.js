@@ -58,6 +58,7 @@ const HistoryPage = observer(() => {
         event.preventDefault();
         user.setUser({})
         user.setIsAuth(false)
+
         navigate(AUTH_ROUTE)
     }
 
