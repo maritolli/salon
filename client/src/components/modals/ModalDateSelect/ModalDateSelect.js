@@ -6,21 +6,24 @@ import ModalDateSelectButtonComponent
     from "../modalsComponents/ModalDateSelectButtonComponent/ModalDateSelectButtonComponent";
 
 
-export default function ModalDateSelect({activeSelf, setActiveSelf, activeEmployee, setActiveEmployee}) {
+export default function ModalDateSelect({activeSelf, setActiveSelf, activeEmployee, setActiveEmployee, selectedDate, setSelectedDate}) {
     const{current_date} = useContext(Context)
-    const [selectedDate, setSelectedDate] = useState()
 
     const[disableContinueButton, setDisableContinueButton] = useState(true)
 
     const handleSubmit=(event)=>{
         event.preventDefault()
         setActiveEmployee(true)
+
         console.log("Selected date: "+selectedDate)
     }
     const handleButtonSubmit = (event)=>{
         event.preventDefault()
         setDisableContinueButton(false)
-        setSelectedDate(event.target.textContent)
+        let my_date = event.target.textContent;
+        let [day,month] = my_date.split('.');
+        my_date = month+'/'+day+'/2024';
+        setSelectedDate(my_date)
     }
 
 

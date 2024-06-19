@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import '../ImportantStyles/colors.css'
 import '../ImportantStyles/font.css'
@@ -12,12 +12,25 @@ import ModalDateSelect from "../../components/modals/ModalDateSelect/ModalDateSe
 
 import {Context} from "../../index";
 import ModalEmployeeSelect from "../../components/modals/ModalEmployeeSelect/ModalEmployeeSelect";
+import {observer} from "mobx-react-lite";
+import {fetchAllServices} from "../../http/serviceAPI";
+import {fetchClientOrders} from "../../http/orderAPI";
+import {specialEmployee} from "../../http/employeeAPI";
 
-const Services = () => {
-    const {service} = useContext(Context)
+const Services = observer(() => {
+    const {service, employee} = useContext(Context)
     const [activeDate, setActiveDate] = useState(false)
     const [myService, setMyService] = useState([])
     const [activeEmployee, setActiveEmployee] = useState(false )
+    const [selectedDate, setSelectedDate] = useState()
+    const [renderCount, setRenderCount] = useState(-1)
+
+    useEffect(() => {
+        fetchAllServices().then(data=> service.setServices(data))
+        if(activeEmployee){
+            specialEmployee(myService[renderCount-1]).then(data=> employee.setEmployees(data))
+        }
+    });
 
     const handleCheckBoxChange =(event)=>{
         const value = event.target.value;
@@ -33,6 +46,7 @@ const Services = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log('Selected services:', myService);
+        setRenderCount(myService.length)
     };
     return (
         <div className="main-container">
@@ -54,9 +68,9 @@ const Services = () => {
 
                     {service.Services.map(service =>
                         <ServiceComponent
-                            name = {service.name}
+                            name = {service.service_name}
                             cost = {service.cost}
-                            id_service = {service.id}
+                            id_service = {service.id_service}
                             handleCheckBoxChange = {handleCheckBoxChange}
                         />
                     )}
@@ -75,6 +89,8 @@ const Services = () => {
                 setActiveSelf={setActiveDate}
                 activeEmployee={activeEmployee}
                 setActiveEmployee={setActiveEmployee}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
             />
 
             <ModalEmployeeSelect
@@ -82,10 +98,14 @@ const Services = () => {
                 setActiveEmployee={setActiveEmployee}
                 activeDate={activeDate}
                 setActiveDate={setActiveDate}
+                renderCount={renderCount}
+                setRenderCount={setRenderCount}
+                myService = {myService}
+                selectedDate ={selectedDate}
             />
 
         </div>
     );
-};
+});
 
 export default Services;

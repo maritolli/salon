@@ -27,6 +27,7 @@ class OrderController{      //////БРАТЬ КАК МАССИВ (УСЛУГА �
             })
             console.log(JSON.stringify(Orders))
 
+            let check_service_ind = []
             //Далее добавим строки в таблицу position
             for(let i = 0; i < Id_employee.length; ++i){
                 for(let j = 0; j < Id_service.length; j++){
@@ -37,13 +38,15 @@ class OrderController{      //////БРАТЬ КАК МАССИВ (УСЛУГА �
                             EmployeeIdEmployee: Id_employee[i]
                         }
                     })
+
                     //Если существует соотношения услуга-работник, то добавляем
-                    if(check_employee_service){
+                    if(check_employee_service && check_service_ind.indexOf(Id_service[j]) === -1){
                         const New_position = await position.create({
                             OrderIdOrder: Orders.id_order,
                             ServiceIdService: Id_service[j],
                             EmployeeIdEmployee: Id_employee[i]
                         })
+                        check_service_ind.push(Id_service[j])
                         console.log(JSON.stringify(`Created position with id service: ${Id_service[j]} ,id_employee: ${Id_employee[i]}`))
                     }
                 }

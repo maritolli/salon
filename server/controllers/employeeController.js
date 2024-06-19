@@ -112,7 +112,7 @@ class EmployeeController{
     async check(req, res){
         //проверка на авторизацию ЧЕРЕЗ ТОКЕН
         //и создает новый токен, если чел постоянно пользуется акком для безопасности
-        const token = generateJwt(req.id, req.login, req.role)
+        const token = generateJwt(req.user.id, req.user.login, req.user.role)
         return res.json({token})
 
         //КАК ОБНОВИТЬ СТРОКУ
@@ -194,6 +194,18 @@ class EmployeeController{
         Chosen_employee.bonus = bonus
         await Chosen_employee.save()
         return res.json(Chosen_employee)
+    }
+
+    async special_employee(req, res){
+        const Special_Employees = await employees_services.findAll({
+            attributes:['EmployeeIdEmployee'],
+            where:{ServiceIdService: req.body.specialization},
+            include:{
+                model: employees,
+                attributes: ['fname','specialization']
+            }
+        })
+        return res.json(Special_Employees)
     }
 
     async show_clients(req, res){

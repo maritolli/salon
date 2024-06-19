@@ -1,19 +1,25 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import './ModalEmployeeSelect.css'
 import {Context} from "../../../index";
 import ModalEmployeeSelectButtonComponent
     from "../modalsComponents/ModalEmployeeSelectButtonComponent/ModalEmployeeSelectButtonComponent";
+import {observer} from "mobx-react-lite";
+import {specialEmployee} from "../../../http/employeeAPI";
+import {jwtDecode} from "jwt-decode";
+import {createOrder} from "../../../http/orderAPI";
+import {HISTORY_ROUTE} from "../../../utils/consts";
+import {useNavigate} from "react-router-dom";
 
 
 
-export default function ModalEmployeeSelect({activeEmployee, setActiveEmployee, activeDate, setActiveDate}) {
-    const[renderCount, setRenderCount] = useState(2);
+const ModalEmployeeSelect =observer (({activeEmployee, setActiveEmployee, activeDate, setActiveDate, renderCount, setRenderCount, myService, selectedDate}) =>{
 
     const{employee} = useContext(Context)
-
+    const navigate = useNavigate()
     const[selectedMoreEmployee, setSelectedMoreEmployee] = useState([])
     const[disableOrderButton, setDisableOrderButton] = useState(true)
+
 
     const handleBackClick =()=>{
         setActiveEmployee(false)
@@ -22,13 +28,8 @@ export default function ModalEmployeeSelect({activeEmployee, setActiveEmployee, 
 
     const handleSelectEmployee =(param, event)=>{//Клик по специалисту
         event.preventDefault()
-        selectedMoreEmployee.some(element=>{
-            if(element.specialization === param.specialization){
-                setSelectedMoreEmployee(selectedMoreEmployee.filter((ss)=>ss!==element))
-            }
-            return 0
-        })
-        setSelectedMoreEmployee([selectedMoreEmployee, param])
+
+        setSelectedMoreEmployee([...selectedMoreEmployee, param])
         setDisableOrderButton(false)
     }
 
@@ -38,12 +39,19 @@ export default function ModalEmployeeSelect({activeEmployee, setActiveEmployee, 
         setRenderCount(renderCount-1)
         setDisableOrderButton(true)
     }
-    const handleOrderButtonClick =(event)=>{//Оформить заказ
+    const handleOrderButtonClick =async(event)=>{//Оформить заказ
         event.preventDefault()
 
-        console.log(selectedMoreEmployee)
+        const my_mas=[]
+        selectedMoreEmployee.map((employee)=>{my_mas.push(employee.id_employee)})
+        console.log(my_mas)
+        let my_id = jwtDecode(localStorage.getItem('token')).id;
+        let data = createOrder(my_id, myService, my_mas, selectedDate)
+        console.log(data)
+        navigate(HISTORY_ROUTE + '/' + my_id);
         setActiveEmployee(false)
     }
+    if(activeEmployee){
     return(
         <div className={ activeEmployee ?"modal-employee-select active-employee" :"modal-employee-select"}>
             <div className="employee-select-container">
@@ -57,9 +65,10 @@ export default function ModalEmployeeSelect({activeEmployee, setActiveEmployee, 
 
                     {employee.Employees.map((employee) =>
                         <ModalEmployeeSelectButtonComponent
-                            key={employee.id}
-                            name={employee.name}
-                            specialization = {employee.specialization}
+                            key={employee.EmployeeIdEmployee}
+                            id_imp ={employee.EmployeeIdEmployee}
+                            name={employee.Employee.fname}
+                            specialization = {employee.Employee.specialization}
                             handleSelectEmployee = {handleSelectEmployee}
                         />
                     )}
@@ -81,5 +90,10 @@ export default function ModalEmployeeSelect({activeEmployee, setActiveEmployee, 
 
             </div>
         </div>
-    )
-}
+    )}
+    else{
+        return 0
+    }
+})
+
+export default ModalEmployeeSelect

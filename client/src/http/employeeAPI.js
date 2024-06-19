@@ -7,8 +7,13 @@ export const employeeLogin = async (Login, Password) => {
     return jwtDecode(data.token)
 }
 
+export const specialEmployee= async (specialization)=>{
+    const {data} = await $authHost.post('api/employee/special', {specialization})
+    return data
+}
+
 export const employeeCheck = async () => {
-    const {data} = await $authHost.get('api/employee/auth')
+    const {data} = await $authHost.get('api/employee/check')
     localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }

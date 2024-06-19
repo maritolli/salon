@@ -17,3 +17,7 @@ export const fetchAdminEmployees = async ()=>{
     const {data} = await $authHost.get('api/employee/best')
     return data
 }
+export const createOrder = async(Id_client, Id_service, Id_employee, Order_date)=>{
+    const {data} = await $authHost.post('api/order/', {Id_client, Id_service, Id_employee, Order_date})
+    return data
+}
